@@ -1,54 +1,44 @@
-# React + TypeScript + Vite
+# 🕰️ 25Hrs - 집중 타이머 + Todo 관리 웹앱
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**25Hrs**는 Pomodoro 타이머와 날짜별 Todo 관리 기능을 제공하는 자기관리형 웹앱입니다.  
+사용자는 집중 시간과 할 일을 기록하고, 실제 집중한 시간만 자동 누적할 수 있습니다.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🔗 배포 주소
 
-## Expanding the ESLint configuration
+👉 [https://hrs-884dd.web.app](https://hrs-884dd.web.app)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 💡 주요 기능
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- ✅ **할 일(To-Do) 기록**: 날짜별로 해야 할 일을 작성하고 체크
+- ⏱️ **25분 집중 타이머**: 웹 포커스를 감지하여 실제 집중 시간만 기록
+- 📊 **통계 시각화**: 집중 시간과 횟수를 캘린더 및 차트로 확인
+- 🔐 **Google 로그인 지원** (Firebase Auth 사용)
+- ☁️ **실시간 데이터 저장** (Firestore 기반)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## 🛠️ 기술 스택
+
+| 기술 | 역할 |
+|------|------|
+| **React + Vite** | 프론트엔드 UI |
+| **TypeScript** | 안정적인 코드 작성 |
+| **Tailwind CSS** | 빠르고 유연한 스타일링 |
+| **Firebase Authentication** | Google 로그인 |
+| **Cloud Firestore** | 사용자별 데이터 저장 |
+| **Firebase Hosting** | 정적 웹사이트 배포 |
+
+---
+
+## 👥 팀 정보
+
+202202191 유윤지 [통번역대학 TESOL영어학전공]
+학번      이서연 []
+
+---
+
+본 프로젝트는 2025 챌커톤을 위해 제작되었습니다.
