@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "../pages/Home";
 import Login from "../pages/Login";
-import CalendarPage from "../pages/Calendar";
+import Calendar from "../pages/Calendar";
 import Friends from "../pages/Friends";
 import Settings from "../pages/Settings";
 import Timer from "../pages/Timer";
@@ -14,7 +14,7 @@ const AppRouter = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/calendar" element={<CalendarPage />} />
+        <Route path="/calendar" element={<Calendar />} />
         <Route path="/friends" element={<Friends />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/timer" element={<Timer />} />

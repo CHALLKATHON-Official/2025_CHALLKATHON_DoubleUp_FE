@@ -1,3 +1,4 @@
+// components/CalendarBox.tsx
 import { useState } from "react";
 
 const weekDays = ["일", "월", "화", "수", "목", "금", "토"];
@@ -33,9 +34,9 @@ const CalendarBox = () => {
   ];
 
   return (
-    <div className="bg-white rounded-xl border border-gray-300 p-4 min-w-[320px] text-sm shadow-sm">
+    <div className="bg-white rounded-xl border border-gray-300 p-4 min-w-[320px] text-sm shadow-sm h-[400px] flex flex-col justify-between">
       {/* 상단 (월 + 버튼) */}
-      <div className="flex justify-between items-center mb-3">
+      <div className="flex justify-between items-center mb-2">
         <span className="font-bold text-gray-800 text-sm">{month + 1}월</span>
         <div className="flex space-x-1">
           <button
@@ -61,9 +62,11 @@ const CalendarBox = () => {
       </div>
 
       {/* 날짜 */}
-      <div className="grid grid-cols-7 text-center text-gray-800 gap-y-1">
+      <div className="grid grid-cols-7 grow text-center text-gray-800 gap-y-1">
         {daysArray.map((day, idx) => (
-          <div key={idx} className="py-1">{day ?? ""}</div>
+          <div key={idx} className="flex items-center justify-center h-full py-[2px]">
+            {day ?? ""}
+          </div>
         ))}
       </div>
     </div>
