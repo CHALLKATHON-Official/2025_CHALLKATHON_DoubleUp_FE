@@ -1,7 +1,13 @@
-// 메인 캘린더 페이지
+// pages/Calendar.tsx
 
-const Calendar = () => {
-  return <h1>캘린더 페이지입니다</h1>;
+import CalendarBox from "../components/CalendarBox";
+
+const CalendarPage = () => {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <CalendarBox />
+    </div>
+  );
 };
 
-export default Calendar;
+export default CalendarPage;
