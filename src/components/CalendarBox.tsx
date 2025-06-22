@@ -35,9 +35,11 @@ const CalendarBox = () => {
 
   return (
     <div className="bg-white rounded-xl border border-gray-300 p-4 min-w-[320px] text-sm shadow-sm h-[400px] flex flex-col justify-between">
-      {/* 상단 (월 + 버튼) */}
+      {/* 상단 (연도 + 월 + 버튼) */}
       <div className="flex justify-between items-center mb-2">
-        <span className="font-bold text-gray-800 text-sm">{month + 1}월</span>
+        <span className="font-bold text-gray-800 text-sm">
+          {year}년 {month + 1}월
+        </span>
         <div className="flex space-x-1">
           <button
             onClick={goToPreviousMonth}
@@ -64,7 +66,10 @@ const CalendarBox = () => {
       {/* 날짜 */}
       <div className="grid grid-cols-7 grow text-center text-gray-800 gap-y-1">
         {daysArray.map((day, idx) => (
-          <div key={idx} className="flex items-center justify-center h-full py-[2px]">
+          <div
+            key={idx}
+            className="flex items-center justify-center h-full py-[2px]"
+          >
             {day ?? ""}
           </div>
         ))}
