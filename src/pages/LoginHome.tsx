@@ -41,13 +41,26 @@ const LoginHome = () => {
         } else {
           // 기존 유저
           const userData = userSnap.data();
-          navigate("/calendar", {
-            state: {
-              uniqueID: userData.uniqueID,
-              displayName: userData.displayName,
-              photoURL: userData.photoURL,
-            },
-          });
+
+          // 닉네임이 없는 경우 → 다시 Welcome 페이지로 이동시켜서 입력받기
+          if (!userData.nickname) {
+            navigate("/welcome", {
+              state: {
+                uniqueID: userData.uniqueID,
+                displayName: userData.displayName || "",
+              },
+            });
+          } else {
+            // 닉네임이 있으면 바로 캘린더 페이지로 이동
+            navigate("/calendar", {
+              state: {
+                uniqueID: userData.uniqueID,
+                displayName: userData.displayName,
+                photoURL: userData.photoURL,
+                nickname: userData.nickname,
+              },
+            });
+          }
         }
       }
     } catch (error) {
