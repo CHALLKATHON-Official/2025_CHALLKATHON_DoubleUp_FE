@@ -1,8 +1,29 @@
 // src/App.tsx
-import AppRouter from './routes/AppRouter';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import LoginHome from "./pages/LoginHome";
+import Welcome from "./pages/Welcome";
+import Calendar from "./pages/Calendar";
+import Friends from "./pages/Friends";
+import Settings from "./pages/Settings";
+import TimerPage from "./pages/TimerPage";
+import NotFound from "./pages/NotFound";
 
 function App() {
-  return <AppRouter />;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/loginhome" element={<LoginHome />} />
+        <Route path="/welcome" element={<Welcome />} />
+        <Route path="/calendar" element={<Calendar />} />
+        <Route path="/friends" element={<Friends />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/timer" element={<TimerPage />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
