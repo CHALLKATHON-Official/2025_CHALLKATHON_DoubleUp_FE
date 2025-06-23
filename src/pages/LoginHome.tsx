@@ -35,7 +35,6 @@ const LoginHome = () => {
           navigate("/welcome", {
             state: {
               uniqueID: randomId,
-              displayName: user.displayName || "",
             },
           });
         } else {
@@ -47,7 +46,6 @@ const LoginHome = () => {
             navigate("/welcome", {
               state: {
                 uniqueID: userData.uniqueID,
-                displayName: userData.displayName || "",
               },
             });
           } else {
@@ -55,7 +53,6 @@ const LoginHome = () => {
             navigate("/calendar", {
               state: {
                 uniqueID: userData.uniqueID,
-                displayName: userData.displayName,
                 photoURL: userData.photoURL,
                 nickname: userData.nickname,
               },
