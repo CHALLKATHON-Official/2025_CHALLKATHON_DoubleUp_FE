@@ -9,43 +9,54 @@ import { FcGoogle } from "react-icons/fc"
 const LoginHome = () => {
   const navigate = useNavigate();
 
-  const handleGoogleLogin = async() =>{
+  const handleGoogleLogin = async () => {
     try {
-      const result = await signInWithPopup(auth, provider); //로그인
-      const user = result.user; //사용자 정보 저장
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
 
-      if(user){
-        const userRef = doc(db,"user", user.uid);
+      if (user) {
+        const userRef = doc(db, "user", user.uid);
         const userSnap = await getDoc(userRef);
 
-        if(!userSnap.exists()){
-          //문서 없을 시 새로 저장(신규 가입자)
-          const randomId = Math.random().toString(36).substring(2, 10) //8자리 고유번호
-          await setDoc(userRef,{
+        if (!userSnap.exists()) {
+          // 신규 유저
+          const randomId = Math.random().toString(36).substring(2, 10);
+
+          localStorage.setItem("uid", user.uid);
+
+          await setDoc(userRef, {
             uid: user.uid,
             email: user.email,
-            displayName: user.displayName,
+            displayName: user.displayName || "",
             uniqueID: randomId,
-            photoURL: user.photoURL,
+            photoURL: user.photoURL || "",
           });
 
-          //최초 가입자 -> welcome 페이지
-          localStorage.setItem("uniqueID", randomId);
-          navigate("/Login", {state:{uniqueID: randomId}});
-
+          navigate("/welcome", {
+            state: {
+              uniqueID: randomId,
+              displayName: user.displayName || "",
+            },
+          });
         } else {
-          //기존 사용자는 바로 캘린더로
-          const uniqueID = userSnap.data().uniqueID;
-          localStorage.setItem("uniqueID", uniqueID);
-          navigate("/Calendar");          
+          // 기존 유저
+          const userData = userSnap.data();
+          navigate("/calendar", {
+            state: {
+              uniqueID: userData.uniqueID,
+              displayName: userData.displayName,
+              photoURL: userData.photoURL,
+            },
+          });
         }
       }
-    } catch (error){
-        console.error("로그인 오류", error);
-        alert("로그인 실패");
-        navigate("/Notfound");
+    } catch (error) {
+      console.error("로그인 오류:", error);
+      alert("로그인 실패");
+      navigate("/Notfound");
     }
   };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-[500px] bg-white">
       {/* 제목과 소개 문장 영역 */}

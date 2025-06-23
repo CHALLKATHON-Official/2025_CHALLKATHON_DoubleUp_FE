@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "../pages/Home";
-import Login from "../pages/Login";
+import LoginHome from "../pages/LoginHome";
+import Welcome from "../pages/Welcome";
 import Calendar from "../pages/Calendar";
 import Friends from "../pages/Friends";
 import Settings from "../pages/Settings";
@@ -13,7 +14,8 @@ const AppRouter = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/loginhome" element={<LoginHome />} />
+        <Route path="/welcome" element={<Welcome />} />
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/friends" element={<Friends />} />
         <Route path="/settings" element={<Settings />} />

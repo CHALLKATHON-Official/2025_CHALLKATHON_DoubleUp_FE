@@ -1,7 +1,0 @@
-// 아이디 등록 로그인 페이지
-
-const Login = () => {
-  return <h1>로그인 페이지입니다</h1>;
-};
-
-export default Login;

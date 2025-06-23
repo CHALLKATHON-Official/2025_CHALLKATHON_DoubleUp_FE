@@ -7,7 +7,7 @@ const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const pages = [
-    { path: "/login", name: "🔐 로그인" },
+    { path: "/loginhome", name: "🔐 로그인" },
     { path: "/calendar", name: "📅 캘린더" },
     { path: "/timer", name: "⏱ 타이머" },
     { path: "/friends", name: "👥 친구" },

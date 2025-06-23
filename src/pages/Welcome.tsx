@@ -1,40 +1,78 @@
-//신규 가입자 환영 페이지로 변경 예정
-
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import CopyID from "../components/CopyID";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase/firebase";
 
+const generateRandomNickname = () => {
+  const adjectives = ["행복한", "용감한", "신나는", "똑똑한"];
+  const animals = ["토끼", "고양이", "사자", "너구리", "강아지", "돌고래"];
+  return `${adjectives[Math.floor(Math.random() * adjectives.length)]}${animals[Math.floor(Math.random() * animals.length)]}${Math.floor(Math.random() * 100)}`;
+};
 
 const Welcome = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const uniqueID = location.state?.uniqueID || localStorage.getItem("uniqueID");
+  const uid = localStorage.getItem("uid");
 
-  useEffect(()=>{
-    if(!uniqueID){
-      navigate("/NotFound"); //ID없을 시 오류 페이지로 이동
+  const [nickname, setNickname] = useState("");
+
+  useEffect(() => {
+    if (!uniqueID || !uid) {
+      navigate("/NotFound");
+    } else {
+      const random = generateRandomNickname();
+      setNickname(random);
     }
-  },[uniqueID, navigate]);
+  }, [uniqueID, uid, navigate]);
 
-  const handleStart = () =>{
-    navigate("/Calendar");
+  const handleStart = async () => {
+    if (!nickname.trim()) {
+      alert("닉네임을 입력해주세요!");
+      return;
+    }
+
+    try {
+      const userRef = doc(db, "user", uid!);
+      await updateDoc(userRef, {
+        nickname: nickname.trim(),
+      });
+      localStorage.setItem("nickname", nickname.trim());
+      navigate("/calendar");
+    } catch (error) {
+      console.error("닉네임 저장 실패:", error);
+      alert("닉네임 저장 중 오류가 발생했어요.");
+    }
   };
-  
+
   return (
-    <div  className="flex flex-col items-center justify-center min-h-screen px-4 bg-white">
+    <div className="flex flex-col items-center justify-center min-h-screen px-4 bg-white">
       <h1 className="text-3xl font-bold text-gray-800 mb-6">가입을 환영합니다!</h1>
-      
-      <CopyID uniqueID={uniqueID||""}/>
+
+      <div className="mb-4 w-full max-w-xs">
+        <label className="block text-gray-600 mb-1">닉네임을 입력해주세요</label>
+        <input
+          type="text"
+          value={nickname}
+          onChange={(e) => setNickname(e.target.value)}
+          className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          placeholder="닉네임을 입력하세요"
+        />
+      </div>
 
       <ul className="mb-6 text-sm text-gray-500 space-y-1">
-        <li>📢 아이디는 최초 가입 시 부여되며, 수정할 수 없습니다. </li>
-        <li>📢 이후 친구목록에서 내 아이디를 확인할 수 있습니다.</li>
+        <li>📢 고유 ID 설정은 최초 가입 시 랜덤 생성됩니다.</li>
+        <li>📢 닉네임은 언제든지 수정 가능해요.</li>
       </ul>
 
-      <button onClick={handleStart} className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg shadow transition">시작하기</button>
+      <button
+        onClick={handleStart}
+        className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg shadow transition"
+      >
+        시작하기
+      </button>
     </div>
   );
-
 };
 
 export default Welcome;
