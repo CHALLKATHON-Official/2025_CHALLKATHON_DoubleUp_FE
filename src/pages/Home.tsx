@@ -14,16 +14,23 @@ const Home = () => {
   }, [navigate]);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-white">
-      {/* 앱 아이콘 */}
-      <img
-        src={appicon}
-        alt="25Hrs 로고"
-        className="w-32 h-32 animate-pulse"
-      />
-      <h1 className="mt-4 text-3xl font-bold text-blue-600">25Hrs</h1>
-      <p className="mt-2 text-sm text-gray-500">로딩 중...</p>
+    <div>
+      <div className="flex flex-col items-center justify-center bg-white pt-10">
+        <h1 className="text-3xl font-bold text-blue-600">25H</h1>
+      </div>
+      <div className="min-h-[700px] flex flex-col items-center justify-center bg-white">      
+        {/* 앱 아이콘 */}
+        <img
+          src={appicon}
+          alt="25Hrs 로고"
+          className="w-48 h-48 animate-pulse"
+        />
+        
+        <p className="mt-2 text-3xl font-bold text-gray-700 pt-10">로딩 중...</p>
+        <p className="mt-2 text-xls text-gray-500 pt-10">⏱ 타이머를 감고 있어요... 조금만 기다려 주세요!</p>
+      </div>
     </div>
+    
   );
 };
 

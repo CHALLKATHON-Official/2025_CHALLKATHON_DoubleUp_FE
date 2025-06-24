@@ -68,24 +68,27 @@ const LoginHome = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[500px] bg-white">
-      {/* 제목과 소개 문장 영역 */}
-      <div className="mb-24 text-center">
-        <h1 className="text-5xl font-bold text-gray-800 mb-2">25H</h1>
-        <p className="text-lg text-gray-600 mb-6">25분 뽀모도로 집중하기</p>
-      </div>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-blue-50">
+        {/* 제목과 소개 문장 영역 */}
+        <div className="mb-24 text-center">
+          <h1 className="text-6xl font-bold text-gray-800 mb-2 pt-20 pb-10">25H</h1>
+          <p className="text-lg text-gray-600">25분 뽀모도로 집중하기✏</p>
+        </div>
 
-      {/* 로그인 버튼 영역 */}
-      <button
-        onClick={handleGoogleLogin}
-        className="flex items-center justify-center gap-2 w-64 min-w-[256px] min-h-[48px] py-2 px-4 border border-gray-300 rounded-[10px] bg-[#FFFFFF]"
-      >
-        <FcGoogle size={20} />
-        <span className="text-base text-gray-700 font-normal">구글 로그인</span>
-      </button>
+        {/* 로그인 버튼 영역 */}
+        <div className="mt-20 flex items-center justify-center">
+          <button
+          onClick={handleGoogleLogin}
+          className="flex items-center justify-center gap-3 px-6 py-3 min-w-[256px] rounded-lg border border-gray-300 bg-white text-gray-700 shadow hover:bg-gray-100 transition"
+        >
+          <FcGoogle size={20} />
+          <span className="text-base text-gray-700 font-normal">구글 로그인</span>
+        </button>
+        </div>
 
-    </div>
     
+      </div>
+      
   );
 };
 
