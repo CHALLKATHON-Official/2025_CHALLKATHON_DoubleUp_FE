@@ -8,6 +8,7 @@ import Friends from "./pages/Friends";
 import Settings from "./pages/Settings";
 import TimerPage from "./pages/TimerPage";
 import NotFound from "./pages/NotFound";
+import Stats from "./pages/Stats";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/settings" element={<Settings />} />
         <Route path="/timer" element={<TimerPage />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="stats" element={<Stats/>}/>
       </Routes>
     </BrowserRouter>
   );

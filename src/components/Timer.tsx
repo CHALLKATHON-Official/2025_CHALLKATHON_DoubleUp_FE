@@ -1,9 +1,13 @@
 // 25분 타이머와 시작버튼, 애니메이션 또는 그림이 포함된 ppomodoro 타이머 컴포넌트
 
 import { useEffect, useState, useRef } from "react";
+import { getAuth } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../firebase/firebase";
 
-const Work_sec = 25 * 60; //작업 시간 25분
-const Break_sec = 5 * 60; //쉬는 시간 5분 
+//확인용을 1분 해놓음 이후 수정
+const Work_sec = 1 * 60; //작업 시간 25분
+const Break_sec = 1 * 60; //쉬는 시간 5분 
 
 //타이머
 const Timer = () =>{
@@ -56,7 +60,16 @@ const Timer = () =>{
                 //work -> break
                 if (mode === "work") {
                     setTodayCycle((c) => {
-                        localStorage.setItem(`todayCycle-${todayKey}`, String(c + 1));
+                        const auth = getAuth();
+                        const user = auth.currentUser;
+                        if (user) {
+                        const docRef = doc(db, "focusSessions", `${user.uid}_${todayKey}`);
+                        setDoc(docRef, {
+                            uid: user.uid,
+                            date: todayKey,
+                            cycleCount: c+1,
+                        }, { merge: true });
+                        }
                         return c + 1;
                     });
                     setMode("break");
