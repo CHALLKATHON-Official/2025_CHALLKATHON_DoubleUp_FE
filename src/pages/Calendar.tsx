@@ -4,6 +4,7 @@ import AddTodoModal from "../components/AddTodoModal";
 import MenuButton from "../components/MenuButton";
 import { db } from "../firebase/firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 // Todo 항목 타입 정의
 interface Todo {
@@ -33,8 +34,9 @@ const CalendarPage = () => {
   // 할 일 추가 모달 열림 여부
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // 현재 로그인한 사용자 UID (로컬 스토리지에서 불러옴)
-  const uid = localStorage.getItem("uid");
+  // 현재 로그인한 사용자 UID
+  const auth = getAuth();
+  const uid = auth.currentUser?.uid;
 
   // 새 할 일 추가
   const handleAddTodo = async (task: string) => {
