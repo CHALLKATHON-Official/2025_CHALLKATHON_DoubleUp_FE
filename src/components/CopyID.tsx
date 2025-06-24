@@ -14,18 +14,18 @@ const CopyID = ({ uniqueID }: { uniqueID: string }) => {
   };
 
   return (
-    <div className="flex flex-col items-center mb-4">
-        <p className="text-base text-gray-600 mb-1">내 아이디</p>
-        <div className="flex items-center space-x-2">
+    <div className="w-full">
+        {/* <p className="text-base text-gray-600 mb-1">내 아이디</p> */}
+        <div className="flex gap-2">
             <input
             type="text"
             value={uniqueID}
             readOnly
-            className="w-72 text-center px-4 py-2 border border-gray-300 rounded-md bg-gray-50 text-gray-700 shadow-sm"
+            className="w-full px-4 py-2 border rounded"
             />
             <button
             onClick={handleCopy}
-            className="px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md text-sm transition"
+            className="min-w-[90px] px-3 py-1 bg-blue-100 rounded hover:bg-blue-200"
             >
             📋 복사
             </button>
