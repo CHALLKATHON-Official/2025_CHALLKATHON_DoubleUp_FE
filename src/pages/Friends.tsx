@@ -1,4 +1,4 @@
- // 친구 페이지
+// 친구 페이지
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuth } from "firebase/auth";
