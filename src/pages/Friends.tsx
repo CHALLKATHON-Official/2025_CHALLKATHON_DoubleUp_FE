@@ -6,6 +6,7 @@ import { doc, getDoc, collection, query, where, getDocs } from "firebase/firesto
 import { db } from "../firebase/firebase";
 import CopyID from "../components/CopyID";
 import Modal from "../components/Modal";
+import BlueArrow from "../images/blueArrow.png";
 
 const Friends = () => {
   const [myUniqueID, setMyUniqueID] = useState("");
@@ -91,7 +92,7 @@ const Friends = () => {
       <button
         onClick={goBack}
         className="flex items-center gap-1 text-sm hover:text-black">
-      <img src="src\images\blueArrow.png" alt="goBack" className="w-8 h-8"/>
+      <img src={BlueArrow} alt="goBack" className="w-8 h-8"/>
       </button>
 
       <p className="mb-1 font-medium">내 아이디</p>
