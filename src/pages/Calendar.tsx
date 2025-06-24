@@ -122,7 +122,7 @@ const CalendarPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center py-8 px-4 relative">
+    <div className="min-h-screen bg-blue-50 flex flex-col items-center justify-start py-10 px-4 space-y-6">
       <MenuButton />
 
       <CalendarBox
@@ -130,12 +130,12 @@ const CalendarPage = () => {
         onDateSelect={(date) => setSelectedDate(getStartOfDay(date))}
       />
 
-      <div className="bg-white mt-4 w-[300px] rounded-xl border border-gray-300 p-4 shadow-sm text-sm relative">
+      <div className="bg-white rounded-xl border border-gray-300 p-6 min-w-[700px] min-h-[300px] text-xl shadow-sm">
         <div className="flex justify-between items-center mb-3">
-          <h3 className="font-semibold">할 일 목록</h3>
+          <h3 className="font-semibold ml-2 pt-1">할 일 목록</h3>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="text-xl font-bold"
+            className="text-2xl font-bold mr-4"
           >
             +
           </button>
@@ -144,11 +144,11 @@ const CalendarPage = () => {
         <div>
           {todos[formatDateKey(selectedDate)]?.length ? (
             todos[formatDateKey(selectedDate)].map((todo, index) => (
-              <div key={index} className="mb-2 flex justify-between items-center">
+              <div key={index} className="mb-2 flex justify-between items-center ml-4 pt-2">
                 <p className={todo.checked ? "line-through text-gray-400" : ""}>
                   {todo.task}
                 </p>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 mr-4">
                   <input
                     type="checkbox"
                     checked={todo.checked}

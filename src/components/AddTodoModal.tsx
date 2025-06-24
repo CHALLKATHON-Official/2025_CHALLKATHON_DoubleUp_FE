@@ -21,7 +21,7 @@ const AddTodoModal: React.FC<AddTodoModalProps> = ({ isOpen, onClose, onAdd }) =
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50">
-      <div className="bg-white rounded-lg p-6 w-72">
+      <div className="bg-white rounded-lg p-6 w-72 min-h-[100px] min-w-[400px]">
         <h2 className="text-lg font-bold mb-4">할 일 추가</h2>
         <form onSubmit={handleSubmit} className="flex flex-col space-y-3">
           <input
@@ -42,7 +42,7 @@ const AddTodoModal: React.FC<AddTodoModalProps> = ({ isOpen, onClose, onAdd }) =
             </button>
             <button
               type="submit"
-              className="bg-black text-white px-3 py-1 rounded text-sm"
+              className="bg-blue-400 text-white px-3 py-1 rounded text-sm"
             >
               추가
             </button>

@@ -60,22 +60,22 @@ const CalendarBox: React.FC<CalendarBoxProps> = ({
     d1.getDate() === d2.getDate();
 
   return (
-    <div className="bg-white rounded-xl border border-gray-300 p-4 min-w-[320px] text-sm shadow-sm">
+    <div className="bg-white rounded-xl border border-gray-300 p-6 min-w-[700px] min-h-[400px] text-xl shadow-sm">
       {/* 상단: 연도/월 및 좌우 이동 버튼 */}
-      <div className="flex justify-between items-center mb-2">
-        <span className="font-bold text-gray-800 text-sm">
+      <div className="flex justify-between items-center mb-2 pb-5">
+        <span className="font-bold text-gray-800 text-2xl">
           {year}년 {month + 1}월
         </span>
         <div className="flex space-x-1">
           <button
             onClick={goToPreviousMonth}
-            className="w-6 h-6 text-sm text-gray-500 hover:text-black rounded hover:bg-gray-200 transition"
+            className="w-6 h-6 text-xl text-gray-500 hover:text-black rounded hover:bg-gray-200 transition"
           >
             &lt;
           </button>
           <button
             onClick={goToNextMonth}
-            className="w-6 h-6 text-sm text-gray-500 hover:text-black rounded hover:bg-gray-200 transition"
+            className="w-6 h-6 text-xl text-gray-500 hover:text-black rounded hover:bg-gray-200 transition"
           >
             &gt;
           </button>
@@ -90,27 +90,31 @@ const CalendarBox: React.FC<CalendarBoxProps> = ({
       </div>
 
       {/* 날짜 렌더링 */}
-      <div className="grid grid-cols-7 gap-y-1 text-center text-gray-800">
-        {daysArray.map((day, idx) => {
-          const thisDate = day ? new Date(year, month, day) : null;
+      <div className="w-full flex justify-center">
+        <div className="grid grid-cols-7 gap-x-11 gap-y-4 text-center text-gray-800">
+          {daysArray.map((day, idx) => {
+            const thisDate = day ? new Date(year, month, day) : null;
 
-          // 해당 날짜가 현재 선택된 날짜인지 확인
-          const isSelected =
-            thisDate !== null && isSameDate(thisDate, selectedDate);
+            // 해당 날짜가 현재 선택된 날짜인지 확인
+            const isSelected =
+              thisDate !== null && isSameDate(thisDate, selectedDate);
 
-          return (
-            <div
-              key={idx}
-              onClick={() => thisDate && onDateSelect(thisDate)} // 날짜 클릭 시 날짜 전달
-              className={`w-8 h-8 flex items-center justify-center leading-none cursor-pointer text-sm transition ${
-                isSelected ? "bg-red-400 text-white rounded-full" : ""
-              }`}
-            >
-              {day ?? ""} {/* null이면 빈칸 */}
-            </div>
-          );
-        })}
+            return (
+              <div
+                key={idx}
+                onClick={() => thisDate && onDateSelect(thisDate)} // 날짜 클릭 시 날짜 전달
+                className={`w-12 h-12 flex items-center justify-center leading-none cursor-pointer text-lg transition ${
+                  isSelected ? "bg-red-400 text-white rounded-full" : ""
+                }`}
+              >
+                {day ?? ""} {/* null이면 빈칸 */}
+              </div>
+            );
+          })}
+        </div>
       </div>
+
+      
     </div>
   );
 };
