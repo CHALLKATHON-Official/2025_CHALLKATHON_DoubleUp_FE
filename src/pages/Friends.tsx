@@ -83,7 +83,7 @@ useEffect(() => {
       unsubList.push(userUnsub);
     });
 
-    // 친구 목록에서 빠진 유저 제거 (선택사항)
+    // 친구 목록에서 빠진 유저 제거
     setFriends((prev) => prev.filter((f) => currentUIDs.includes(f.uid)));
   });
 

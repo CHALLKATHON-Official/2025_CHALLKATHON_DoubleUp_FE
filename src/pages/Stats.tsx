@@ -109,7 +109,7 @@ const Stats = () => {
       <CalendarBox selectedDate={selectedDate} onDateSelect={setSelectedDate} />
       <div className="w-full max-w-[700px] bg-white border-gray-300 mt-8 border rounded-xl p-6">
         <div className="text-center mt-6 text-lg text-gray-700 font-['IBM_Plex_Sans_KR']">
-          오늘은 {hours}시간 {minutes}분 집중하셨어요. <br /> 🍅 총 {cycleCount}회 완료
+          {selectedDate.getMonth() + 1}월 {selectedDate.getDate()}일은 {hours}시간 {minutes}분 집중하셨어요. <br /> 🍅 총 {cycleCount}회 완료
         </div>
         <div className="w-full max-w-4xl mt-10">
           <h2 className="text-xl font-semibold text-[var(--color-week-graph)] mb-2 font-['IBM_Plex_Sans_KR']">주간 집중 통계</h2>
