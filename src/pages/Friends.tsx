@@ -15,7 +15,7 @@ import {
 import { db } from "../firebase/firebase";
 import CopyID from "../components/CopyID";
 import Modal from "../components/Modal";
-import BlueArrow from "../images/blueArrow.png";
+//import BlueArrow from "../images/blueArrow.png";
 import defaultBunny from "../images/default-bunny.png";
 import FriendCard from "../components/FriendCard";
 
@@ -154,10 +154,11 @@ const Friends = () => {
   };
 
   return (
-    <div className="min-h-screen min-w-screen bg-blue-50 flex justify-center items-start py-10 font-['IBM_Plex_Sans_KR']">
+    <div className="min-h-screen min-w-screen bg-white flex justify-center items-start py-10 font-['IBM_Plex_Sans_KR']">
       <div className="w-full max-w-md space-y-6 px-4">
         <button onClick={goBack} className="absolute top-4 left-4 flex items-center">
-          <img src={BlueArrow} alt="goBack" className="w-8 h-8" />
+          {/* <img src={BlueArrow} alt="goBack" className="w-8 h-8" /> */}
+          ❮ 뒤로가기
         </button>
 
         <div>
@@ -174,7 +175,7 @@ const Friends = () => {
             />
             <button
               onClick={searchID}
-              className="min-w-[90px] px-3 py-1 bg-blue-100 rounded hover:bg-blue-200"
+              className="min-w-[90px] px-3 py-1  bg-[var(--color-btn)]  rounded hover:bg-[var(--color-btn-hover)]"
             >
               🔍 추가
             </button>

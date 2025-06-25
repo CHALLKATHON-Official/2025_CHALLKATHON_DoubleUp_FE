@@ -122,7 +122,7 @@ const CalendarPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-blue-50 flex flex-col items-center justify-start py-10 px-4 space-y-6">
+    <div className="min-h-screen bg-white flex flex-col items-center justify-start py-10 px-4 space-y-6">
       <MenuButton />
 
       <CalendarBox
@@ -135,7 +135,7 @@ const CalendarPage = () => {
           <h3 className="font-semibold ml-2 pt-1">할 일 목록</h3>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="text-2xl font-bold mr-4"
+            className="text-2xl font-bold mr-4 "
           >
             +
           </button>

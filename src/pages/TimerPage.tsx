@@ -14,13 +14,14 @@ const TimerPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-blue-50 relative">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-white relative">
       {/* 화면 왼쪽 상단 고정 뒤로가기 버튼 */}
       <button
         onClick={goBack}
         className="absolute top-4 left-4 flex items-center"
       >
-        <img src={BlueArrow} alt="goBack" className="w-8 h-8" />
+        {/* <img src={BlueArrow} alt="goBack" className="w-8 h-8" /> */}
+        ❮ 뒤로가기
       </button>
 
       {/* 토끼 이미지 */}
@@ -35,7 +36,7 @@ const TimerPage = () => {
           onClick={() => setMode("work")}
           disabled={isRunning}
           className={`text-3xl px-4 py-2 rounded-lg shadow ${
-            mode === "work" ? "bg-blue-200" : "bg-gray-100"
+            mode === "work" ? "bg-[var(--color-btn-hover)]" : "bg-[var(--color-btn)]"
           } ${isRunning ? "opacity-50 cursor-not-allowed" : ""}`}
         >
           📖
@@ -44,7 +45,7 @@ const TimerPage = () => {
           onClick={() => setMode("break")}
           disabled={isRunning}
           className={`text-3xl px-4 py-2 rounded-lg shadow ${
-            mode === "break" ? "bg-blue-200" : "bg-gray-100"
+            mode === "break" ? "bg-[var(--color-btn-hover)]" : "bg-[var(--color-btn)]"
           } ${isRunning ? "opacity-50 cursor-not-allowed" : ""}`}
         >
           💤

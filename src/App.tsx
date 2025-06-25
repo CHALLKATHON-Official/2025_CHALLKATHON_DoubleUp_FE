@@ -9,6 +9,7 @@ import Settings from "./pages/Settings";
 import TimerPage from "./pages/TimerPage";
 import NotFound from "./pages/NotFound";
 import Stats from "./pages/Stats";
+import Theme from "./pages/Theme";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/timer" element={<TimerPage />} />
         <Route path="*" element={<NotFound />} />
         <Route path="stats" element={<Stats/>}/>
+        <Route path="theme" element={<Theme/>}/>
       </Routes>
     </BrowserRouter>
   );
