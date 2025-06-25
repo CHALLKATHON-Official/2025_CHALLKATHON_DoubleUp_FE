@@ -14,6 +14,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import BlueArrow from "../images/blueArrow.png";
 
 const getWeekRange = (date: Date): Date[] => {
   const start = new Date(date);
@@ -45,6 +46,10 @@ const Stats = () => {
   const [weeklyData, setWeeklyData] = useState<any[]>([]);
   const [monthlyData, setMonthlyData] = useState<any[]>([]);
   const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate("/calendar");
+  };
 
   const fetchTodaySummary = async (date: Date) => {
     const auth = getAuth();
@@ -91,42 +96,50 @@ const Stats = () => {
   const minutes = focusTime % 60;
 
   return (
-    <div className="min-h-screen px-4 py-6 bg-white flex flex-col items-center">
-      <h1 className="text-3xl font-bold mb-4 text-gray-800">통계 보기</h1>
+    <div className="min-h-screen px-4 py-6 flex flex-col items-center bg-blue-50">
+      <button
+        onClick={goBack}
+        className="absolute top-4 left-4 flex items-center gap-1 text-sm hover:text-black"
+      >
+        <img src={BlueArrow} alt="goBack" className="w-8 h-8" />
+      </button>
+      <h1 className="text-3xl font-bold mb-8 mt-8 text-gray-800 font-['IBM_Plex_Sans_KR']">통계 보기</h1>
 
       <CalendarBox selectedDate={selectedDate} onDateSelect={setSelectedDate} />
+      <div className="w-full max-w-[700px] bg-white border-gray-300 mt-8 border rounded-xl p-6">
+        {/* 오늘 집중 시간 텍스트 */}
+        <div className="text-center mt-6 text-lg text-gray-700 font-['IBM_Plex_Sans_KR']">
+          오늘은 {hours}시간 {minutes}분 집중하셨어요. <br/> 🍅 총 {cycleCount}회 완료
+        </div>
+        {/* 그래프 영역 */}
+        <div className="w-full max-w-4xl mt-10">
+          <h2 className="text-xl font-semibold text-red-400 mb-2 font-['IBM_Plex_Sans_KR']">주간 집중 통계</h2>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={weeklyData} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="label" />
+              <YAxis allowDecimals={false} />
+              <Tooltip />
+              <Bar dataKey="count" fill="#f87171" />
+            </BarChart>
+          </ResponsiveContainer>
 
-      <div className="text-center mt-6 text-lg text-gray-700">
-        오늘은 {hours}시간 {minutes}분 집중하셨어요. 🍅 총 {cycleCount}회 완료
+          <h2 className="text-xl font-semibold text-green-600 mt-10 mb-2 font-['IBM_Plex_Sans_KR']">월간 집중 통계</h2>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={monthlyData} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="label" interval={4} />
+              <YAxis allowDecimals={false} />
+              <Tooltip />
+              <Bar dataKey="count" fill="#50C878" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
       </div>
-
-      <div className="w-full max-w-4xl mt-10">
-        <h2 className="text-xl font-semibold text-red-400 mb-2">주간 집중 통계</h2>
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={weeklyData} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="label" />
-            <YAxis allowDecimals={false} />
-            <Tooltip />
-            <Bar dataKey="count" fill="#f87171" />
-          </BarChart>
-        </ResponsiveContainer>
-
-        <h2 className="text-xl font-semibold text-green-600 mt-10 mb-2">월간 집중 통계</h2>
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={monthlyData} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="label" interval={4} />
-            <YAxis allowDecimals={false} />
-            <Tooltip />
-            <Bar dataKey="count" fill="#50C878" />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-
+      {/* 확인 버튼 */}
       <button
         onClick={() => navigate("/settings")}
-        className="mt-10 bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg shadow"
+        className="mt-10 bg-blue-400 hover:bg-blue-500 text-white px-6 py-2 rounded-lg shadow font-['IBM_Plex_Sans_KR']"
       >
         확인
       </button>

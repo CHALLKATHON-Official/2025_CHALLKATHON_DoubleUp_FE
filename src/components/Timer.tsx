@@ -127,7 +127,7 @@ const Timer = ({ mode, onRunningChange }: TimerProps) => {
   const progress = (1 - secondsLeft / (mode === "work" ? WORK_SEC : BREAK_SEC)) * 100;
 
   return (
-    <div className="flex flex-col items-center gap-6 select-none p-6">
+    <div className="flex flex-col items-center gap-6 select-none p-6 font-['IBM_Plex_Sans_KR']">
 
       <Modal isOpen={showModal} onClose={handleModalClose}>
         <div className="text-center">

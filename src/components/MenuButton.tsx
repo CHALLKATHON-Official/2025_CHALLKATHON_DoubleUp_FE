@@ -11,7 +11,7 @@ const MenuButton = () => {
   };
 
   return (
-    <div className="absolute top-4 right-4 z-50">
+    <div className="absolute top-4 right-4 z-50 font-['IBM_Plex_Sans_KR']">
       <div className="relative inline-block text-left">
         <button
           onClick={() => setIsOpen(!isOpen)}

@@ -17,7 +17,7 @@ const Settings = () => {
   };
 
   return (
-    <div className="min-h-screen bg-blue-50 flex justify-center items-start pt-10 relative">
+    <div className="min-h-screen bg-blue-50 flex justify-center items-start pt-10 relative font-['IBM_Plex_Sans_KR']">
       {/* 왼쪽 상단 고정 뒤로가기 버튼 */}
       <button
         onClick={goBack}
@@ -51,7 +51,7 @@ const Settings = () => {
             </div>
             <button
               onClick={() => setModalOpen(false)}
-              className="px-4 py-1 bg-blue-200 rounded hover:bg-blue-300"
+              className="px-4 py-1 text-white bg-blue-400 rounded hover:bg-blue-300"
             >
               확인
             </button>

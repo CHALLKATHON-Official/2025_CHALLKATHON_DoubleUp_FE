@@ -88,7 +88,7 @@ const Friends = () => {
     };
   };
   return(
-    <div className="min-h-screen min-w-screen bg-blue-50 flex justify-center items-start py-10">
+    <div className="min-h-screen min-w-screen bg-blue-50 flex justify-center items-start py-10 font-['IBM_Plex_Sans_KR']">
       {/* 뒤로가기 버튼 */}
       <div className="w-full max-w-md space-y-6 px-4">
         <button

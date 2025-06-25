@@ -60,7 +60,7 @@ const CalendarBox: React.FC<CalendarBoxProps> = ({
     d1.getDate() === d2.getDate();
 
   return (
-    <div className="bg-white rounded-xl border border-gray-300 p-6 min-w-[700px] min-h-[400px] text-xl shadow-sm">
+    <div className="bg-white rounded-xl border border-gray-300 p-6 min-w-[700px] min-h-[400px] text-xl shadow-sm font-['IBM_Plex_Sans_KR']">
       {/* 상단: 연도/월 및 좌우 이동 버튼 */}
       <div className="flex justify-between items-center mb-2 pb-5">
         <span className="font-bold text-gray-800 text-2xl">
