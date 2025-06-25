@@ -27,13 +27,6 @@ const Timer = ({ mode, onRunningChange }: TimerProps) => {
   const uid = user?.uid ?? "unknown";
   const userCycleKey = `todayCycle-${uid}-${todayKey}`;
 
-  const setFocusingStatus = async (status: boolean) => {
-  const user = getAuth().currentUser;
-  if (!user) return;
-  const userRef = doc(db, "user", user.uid);
-  await setDoc(userRef, { isFocusing: status }, { merge: true });
-};
-
   useEffect(() => {
     if (!isRunning) {
       setSecondsLeft(mode === "work" ? WORK_SEC : BREAK_SEC);
@@ -76,7 +69,6 @@ const Timer = ({ mode, onRunningChange }: TimerProps) => {
         clearInterval(intervalRef.current!);
         setIsRunning(false);
         setShowModal(true);
-        setFocusingStatus(false);
 
         if (mode === "work") {
           const nextCycle = cycleCount + 1;
@@ -120,11 +112,9 @@ const Timer = ({ mode, onRunningChange }: TimerProps) => {
     if (isRunning) {
       clearInterval(intervalRef.current!);
       setIsRunning(false);
-      setFocusingStatus(false);
     } else {
       setIsRunning(true);
       setShowModal(false);
-      setFocusingStatus(true);
     }
   };
 
