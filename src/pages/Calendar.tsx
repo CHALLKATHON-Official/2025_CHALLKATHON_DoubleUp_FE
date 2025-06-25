@@ -130,7 +130,7 @@ const CalendarPage = () => {
         onDateSelect={(date) => setSelectedDate(getStartOfDay(date))}
       />
 
-      <div className="bg-white rounded-xl border border-gray-300 p-6 min-w-[700px] min-h-[300px] text-xl shadow-sm">
+      <div className="bg-white rounded-xl border border-gray-300 p-6 min-w-[700px] min-h-[300px] text-xl shadow-sm font-['IBM_Plex_Sans_KR']">
         <div className="flex justify-between items-center mb-3">
           <h3 className="font-semibold ml-2 pt-1">할 일 목록</h3>
           <button

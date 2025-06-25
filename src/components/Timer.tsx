@@ -9,8 +9,8 @@ interface TimerProps {
   onRunningChange?: (running: boolean) => void;
 }
 
-const WORK_SEC = 25;
-const BREAK_SEC = 5;
+const WORK_SEC = 25; //25*60;
+const BREAK_SEC = 5; //5*60;
 
 const Timer = ({ mode, onRunningChange }: TimerProps) => {
   const [isRunning, setIsRunning] = useState(false);
@@ -127,7 +127,7 @@ const Timer = ({ mode, onRunningChange }: TimerProps) => {
   const progress = (1 - secondsLeft / (mode === "work" ? WORK_SEC : BREAK_SEC)) * 100;
 
   return (
-    <div className="flex flex-col items-center gap-6 select-none p-6">
+    <div className="flex flex-col items-center gap-6 select-none p-6 font-['IBM_Plex_Sans_KR']">
 
       <Modal isOpen={showModal} onClose={handleModalClose}>
         <div className="text-center">
@@ -146,8 +146,8 @@ const Timer = ({ mode, onRunningChange }: TimerProps) => {
       <div
         className="relative grid place-items-center rounded-full border-4 border-blue-300"
         style={{
-          width: "260px",
-          height: "260px",
+          width: "320px",
+          height: "320px",
           background: `conic-gradient(#bfdbfe ${progress}%, transparent 0)`,
         }}
       >
@@ -156,7 +156,7 @@ const Timer = ({ mode, onRunningChange }: TimerProps) => {
 
       <button
         onClick={handleToggle}
-        className={`px-6 py-2 rounded-md shadow ${
+        className={`px-6 py-2 mt-8 rounded-md shadow ${
           isRunning
             ? "bg-red-400 hover:bg-red-500 text-white"
             : "bg-blue-400 hover:bg-blue-500 text-white"
