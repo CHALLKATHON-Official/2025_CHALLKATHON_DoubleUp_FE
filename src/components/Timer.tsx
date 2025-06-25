@@ -9,8 +9,8 @@ interface TimerProps {
   onRunningChange?: (running: boolean) => void;
 }
 
-const WORK_SEC = 25; //25*60;
-const BREAK_SEC = 5; //5*60;
+const WORK_SEC = 25*60;
+const BREAK_SEC = 5*60;
 
 // KST 기준 날짜 키 생성 함수 추가
 const getKSTDateKey = (date: Date) => {

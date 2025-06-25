@@ -68,7 +68,7 @@ const LoginHome = () => {
       {/* 제목과 소개 문장 영역 */}
       <div className="mb-24 text-center">
         <h1 className="text-6xl font-bold text-gray-800 mb-2 pt-20 pb-10">25H</h1>
-        <p className="text-lg text-gray-600">25분 뽀모도로 집중하기✏</p>
+        <p className="text-lg text-gray-600">25분 뽀모도로 집중하기</p>
       </div>
 
       {/* 로그인 버튼 영역 */}

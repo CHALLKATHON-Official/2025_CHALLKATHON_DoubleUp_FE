@@ -17,9 +17,8 @@ const TimerPage = () => {
       {/* 화면 왼쪽 상단 고정 뒤로가기 버튼 */}
       <button
         onClick={goBack}
-        className="absolute top-4 left-4 flex items-center"
+        className="absolute top-4 left-4 flex items-center text-base"
       >
-        {/* <img src={BlueArrow} alt="goBack" className="w-8 h-8" /> */}
         ❮ 뒤로가기
       </button>
 

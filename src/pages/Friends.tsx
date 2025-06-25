@@ -15,7 +15,13 @@ interface Friend {
   isFocusing: boolean;
 }
 
+const pastelColors = [
+  "#F9C8D9", "#D1F9C8", "#C8E7F9", "#FFE7CC", "#E5D1F9", "#F9F1C8"
+];
+
+
 const Friends = () => {
+  const randomColor = pastelColors[Math.floor(Math.random() * pastelColors.length)];
   const [myUniqueID, setMyUniqueID] = useState("");
   const [inputID, setInputID] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
@@ -153,8 +159,8 @@ useEffect(() => {
 
   return (
     <div className="min-h-screen min-w-screen bg-[var(--color-bg)] flex justify-center items-start py-10 font-['IBM_Plex_Sans_KR']">
-      <div className="w-full max-w-md space-y-6 px-4">
-        <button onClick={goBack} className="absolute top-4 left-4 flex items-center">
+      <div className="w-full max-w-md px-4">
+        <button onClick={goBack} className="absolute top-4 left-4 flex items-center text-base">
           ❮ 뒤로가기
         </button>
 
@@ -199,11 +205,12 @@ useEffect(() => {
                 src={defaultBunny}
                 alt="기본 프로필"
                 className="w-20 h-20 rounded-full object-cover"
+                style={{ backgroundColor: randomColor }}
               />
               <p className="text-xl font-semibold">{selectedUser.name}</p>
               <button
                 onClick={addFriend}
-                className="px-4 py-2 bg-blue-200 rounded hover:bg-blue-300"
+                className="px-4 py-2 bg-[var(--color-btn)] rounded hover:bg-[var(--color-btn-hover)]"
               >
                 추가
               </button>
