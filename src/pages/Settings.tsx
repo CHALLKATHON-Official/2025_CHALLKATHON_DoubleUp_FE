@@ -98,8 +98,8 @@ const Settings = () => {
           <div className="flex flex-col items-center p-5 text-center">
             <p className="mb-3 font-bold text-left pb-3">문의사항은<br />아래의 메일로 보내주세요!</p>
             <div className="mb-6 space-y-2 text-base text-gray-700">
-              <p>📬 abc@gmail.com</p>
-              <p>📬 def@gmail.com</p>
+              <p>📬 yunj@hufs.ac.kr</p>
+              <p>📬 liruiyan@hufs.ac.kr</p>
             </div>
             <button
               onClick={() => setModalOpen(false)}
