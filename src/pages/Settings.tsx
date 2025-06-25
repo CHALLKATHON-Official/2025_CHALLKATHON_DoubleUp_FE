@@ -1,6 +1,5 @@
 // Settings.tsx
 import { useNavigate } from "react-router-dom";
-//import BlueArrow from "../images/blueArrow.png";
 import { useState } from "react";
 import Modal from "../components/Modal";
 
@@ -27,28 +26,39 @@ const Settings = () => {
           onClick={goBack}
           className="absolute top-4 left-4 flex items-center gap-1 text-sm hover:text-black"
         >
-          {/* <img src={BlueArrow} alt="goBack" className="w-8 h-8" /> */}
         ❮ 뒤로가기
         </button>
 
         <div className="w-[480px] h-[480px] shadow-md border rounded-md px-6 py-8 bg-white">
           <p className="text-lg text-gray-500 mb-6">⚙ 설정</p>
 
-          <div className="border-b border-gray-300 py-4">
-            <p className="text-lg font-semibold text-black" onClick={goStats}>
-              통계보기
-            </p>
-          </div>
-          
-          <div className="border-b border-gray-300 py-4">
-            <p className="text-lg font-semibold text-black" onClick={goTheme}>
-              테마 설정
-            </p>
-          </div>
+        <div className="border-b border-gray-300 py-4">
+          <p
+            className="text-lg font-semibold text-black cursor-pointer hover:text-gray-600 transition"
+            onClick={goStats}
+          >
+            통계보기
+          </p>
+        </div>
 
-          <div className="border-b border-gray-300 py-4">
-            <p className="text-lg font-semibold text-black" onClick={()=>setModalOpen(true)}>문의하기</p>
-          </div>
+        <div className="border-b border-gray-300 py-4">
+          <p
+            className="text-lg font-semibold text-black cursor-pointer hover:text-gray-600 transition"
+            onClick={goTheme}
+          >
+            테마 설정
+          </p>
+        </div>
+
+        <div className="border-b border-gray-300 py-4">
+          <p
+            className="text-lg font-semibold text-black cursor-pointer hover:text-gray-600 transition"
+            onClick={() => setModalOpen(true)}
+          >
+            문의하기
+          </p>
+        </div>
+
         </div>
 
         {/* CS모달 */}
@@ -74,7 +84,5 @@ const Settings = () => {
     
   );
 };
-
-  
 
 export default Settings;
