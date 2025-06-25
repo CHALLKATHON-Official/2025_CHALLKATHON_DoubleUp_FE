@@ -143,7 +143,7 @@ const Friends = () => {
   };
 
   return (
-    <div className="min-h-screen min-w-screen bg-white flex justify-center items-start py-10 font-['IBM_Plex_Sans_KR']">
+    <div className="min-h-screen min-w-screen bg-[var(--color-bg)] flex justify-center items-start py-10 font-['IBM_Plex_Sans_KR']">
       <div className="w-full max-w-md space-y-6 px-4">
         <button onClick={goBack} className="absolute top-4 left-4 flex items-center">
           {/* <img src={BlueArrow} alt="goBack" className="w-8 h-8" /> */}

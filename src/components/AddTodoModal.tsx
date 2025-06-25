@@ -42,7 +42,7 @@ const AddTodoModal: React.FC<AddTodoModalProps> = ({ isOpen, onClose, onAdd }) =
             </button>
             <button
               type="submit"
-              className="text-white px-3 py-1.5 text-sm bg-blue-400 rounded hover:bg-blue-500"
+              className="text-white px-3 py-1.5 text-sm bg-[var(--color-btn)] rounded hover:bg-[var(--color-btn-hover)]"
             >
               추가
             </button>
