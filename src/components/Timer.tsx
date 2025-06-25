@@ -9,10 +9,9 @@ interface TimerProps {
   onRunningChange?: (running: boolean) => void;
 }
 
-const WORK_SEC = 25*60;
-const BREAK_SEC = 5*60;
+const WORK_SEC = 25 * 60;
+const BREAK_SEC = 5 * 60;
 
-// KST 기준 날짜 키 생성 함수 추가
 const getKSTDateKey = (date: Date) => {
   const year = date.getFullYear();
   const month = (date.getMonth() + 1).toString().padStart(2, "0");
@@ -45,7 +44,14 @@ const Timer = ({ mode, onRunningChange }: TimerProps) => {
     onRunningChange?.(isRunning);
   }, [isRunning]);
 
-  // Firestore에서 오늘의 집중 기록을 먼저 불러오고 localStorage 동기화
+  useEffect(() => {
+  return () => {
+    if (isRunning) {
+      updateDoc(doc(db, "user", uid), { isFocusing: false });
+    }
+  };
+}, [isRunning, uid]);
+
   useEffect(() => {
     const fetchCycleCount = async () => {
       if (mode !== "work" || !user) return;
@@ -70,13 +76,16 @@ const Timer = ({ mode, onRunningChange }: TimerProps) => {
   useEffect(() => {
     if (!isRunning) return;
 
-    intervalRef.current = setInterval(() => {
+    intervalRef.current = setInterval(async () => {
       setSecondsLeft((prev) => {
         if (prev > 1) return prev - 1;
 
         clearInterval(intervalRef.current!);
         setIsRunning(false);
         setShowModal(true);
+
+        // 타이머 종료 시 isFocusing false 설정
+        updateDoc(doc(db, "user", uid), { isFocusing: false });
 
         if (mode === "work") {
           const nextCycle = cycleCount + 1;
@@ -94,7 +103,6 @@ const Timer = ({ mode, onRunningChange }: TimerProps) => {
   }, [isRunning, mode, cycleCount, userCycleKey]);
 
   const saveFocusToFirestore = async () => {
-    const user = getAuth().currentUser;
     if (!user) return;
 
     const docRef = doc(db, "user", user.uid, "focusRecords", todayKey);
@@ -116,13 +124,15 @@ const Timer = ({ mode, onRunningChange }: TimerProps) => {
     }
   };
 
-  const handleToggle = () => {
+  const handleToggle = async () => {
     if (isRunning) {
       clearInterval(intervalRef.current!);
       setIsRunning(false);
+      await updateDoc(doc(db, "user", uid), { isFocusing: false }); // 수동 정지 시
     } else {
       setIsRunning(true);
       setShowModal(false);
+      await updateDoc(doc(db, "user", uid), { isFocusing: true }); // 시작 시
     }
   };
 
@@ -136,7 +146,6 @@ const Timer = ({ mode, onRunningChange }: TimerProps) => {
 
   return (
     <div className="flex flex-col items-center gap-6 select-none p-6 font-['IBM_Plex_Sans_KR']">
-
       <Modal isOpen={showModal} onClose={handleModalClose}>
         <div className="text-center">
           <p className="text-lg font-semibold">
