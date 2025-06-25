@@ -22,12 +22,11 @@ const Theme = () => {
 
   return (
     <div className="flex pt-10 justify-center bg-[var(--color-bg)] font-['IBM_Plex_Sans_KR'] min-h-screen">
-      <div className="w-[480px] h-[480px] shadow-md border rounded-md px-6 py-8 bg-white">
+      <div className="w-[90%] sm:w-full sm:max-w-sm h-[480px] shadow-md mt-9 border rounded-md px-4 sm:px-6 py-6 sm:py-8 bg-white">
         <button
           onClick={goBack}
           className="absolute top-4 left-4 flex items-center gap-1 text-base hover:text-black"
         >
-          {/* <img src={BlueArrow} alt="goBack" className="w-8 h-8" /> */}
           ❮ 뒤로가기
         </button>
         <div className="p-6">

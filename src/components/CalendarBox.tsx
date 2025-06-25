@@ -60,10 +60,10 @@ const CalendarBox: React.FC<CalendarBoxProps> = ({
     d1.getDate() === d2.getDate();
 
   return (
-    <div className="bg-white rounded-xl border border-gray-300 p-6 min-w-[700px] min-h-[400px] text-xl shadow-sm font-['IBM_Plex_Sans_KR']">
+    <div className="bg-white rounded-xl border border-gray-300 p-4 sm:p-6 w-full max-w-3xl min-h-[400px] text-base sm:text-xl shadow-sm font-['IBM_Plex_Sans_KR']">
       {/* 상단: 연도/월 및 좌우 이동 버튼 */}
       <div className="flex justify-between items-center mb-2 pb-5">
-        <span className="font-bold text-gray-800 text-2xl">
+        <span className="font-bold text-gray-800 text-lg sm:text-2xl">
           {year}년 {month + 1}월
         </span>
         <div className="flex space-x-1">
@@ -83,7 +83,7 @@ const CalendarBox: React.FC<CalendarBoxProps> = ({
       </div>
 
       {/* 요일 표시 */}
-      <div className="grid grid-cols-7 text-center text-gray-500 mb-2">
+      <div className="grid grid-cols-7 text-center text-gray-500 mb-2 text-sm sm:text-base">
         {weekDays.map((day, idx) => (
           <div key={idx}>{day}</div>
         ))}
@@ -91,7 +91,7 @@ const CalendarBox: React.FC<CalendarBoxProps> = ({
 
       {/* 날짜 렌더링 */}
       <div className="w-full flex justify-center">
-        <div className="grid grid-cols-7 gap-x-11 gap-y-4 text-center text-gray-800">
+        <div className="grid grid-cols-7 gap-x-6 sm:gap-x-11 gap-y-4 text-center text-gray-800">
           {daysArray.map((day, idx) => {
             const thisDate = day ? new Date(year, month, day) : null;
 
@@ -103,7 +103,7 @@ const CalendarBox: React.FC<CalendarBoxProps> = ({
               <div
                 key={idx}
                 onClick={() => thisDate && onDateSelect(thisDate)} // 날짜 클릭 시 날짜 전달
-                className={`w-12 h-12 flex items-center justify-center leading-none cursor-pointer text-lg transition ${
+                className={`w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center leading-none cursor-pointer text-sm sm:text-lg transition ${
                   isSelected ? "bg-[var(--color-accent)] text-white rounded-full" : ""
                 }`}
               >
