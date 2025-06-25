@@ -24,7 +24,7 @@ const Settings = () => {
         {/* 왼쪽 상단 고정 뒤로가기 버튼 */}
         <button
           onClick={goBack}
-          className="absolute top-4 left-4 flex items-center gap-1 text-sm hover:text-black"
+          className="absolute top-4 left-4 flex items-center gap-1 text-base hover:text-black"
         >
         ❮ 뒤로가기
         </button>
@@ -37,7 +37,7 @@ const Settings = () => {
             className="text-lg font-semibold text-black cursor-pointer hover:text-gray-600 transition"
             onClick={goStats}
           >
-            통계보기
+            통계 보기
           </p>
         </div>
 

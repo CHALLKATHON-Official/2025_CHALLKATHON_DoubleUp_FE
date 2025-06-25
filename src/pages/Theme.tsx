@@ -25,7 +25,7 @@ const Theme = () => {
       <div className="w-[480px] h-[480px] shadow-md border rounded-md px-6 py-8 bg-white">
         <button
           onClick={goBack}
-          className="absolute top-4 left-4 flex items-center gap-1 text-sm hover:text-black"
+          className="absolute top-4 left-4 flex items-center gap-1 text-base hover:text-black"
         >
           {/* <img src={BlueArrow} alt="goBack" className="w-8 h-8" /> */}
           ❮ 뒤로가기

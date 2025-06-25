@@ -100,7 +100,7 @@ const Stats = () => {
     <div className="min-h-screen px-4 py-6 flex flex-col items-center  bg-[var(--color-bg)] ">
       <button
         onClick={goBack}
-        className="absolute top-4 left-4 flex items-center gap-1 text-sm hover:text-black"
+        className="absolute top-4 left-4 flex items-center gap-1 text-base hover:text-black"
       >
         ❮ 뒤로가기
       </button>
