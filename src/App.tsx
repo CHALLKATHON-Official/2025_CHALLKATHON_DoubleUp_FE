@@ -10,6 +10,7 @@ import TimerPage from "./pages/TimerPage";
 import NotFound from "./pages/NotFound";
 import Stats from "./pages/Stats";
 import Theme from "./pages/Theme";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -18,13 +19,16 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/loginhome" element={<LoginHome />} />
         <Route path="/welcome" element={<Welcome />} />
-        <Route path="/calendar" element={<Calendar />} />
-        <Route path="/friends" element={<Friends />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/timer" element={<TimerPage />} />
+
+        {/* 로그인한 사용자만 접근 가능 */}
+        <Route path="/calendar" element={<ProtectedRoute><Calendar /></ProtectedRoute>} />
+        <Route path="/friends" element={<ProtectedRoute><Friends /></ProtectedRoute>} />
+        <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+        <Route path="/timer" element={<ProtectedRoute><TimerPage /></ProtectedRoute>} />
+        <Route path="/stats" element={<ProtectedRoute><Stats /></ProtectedRoute>} />
+        <Route path="/theme" element={<ProtectedRoute><Theme /></ProtectedRoute>} />
+
         <Route path="*" element={<NotFound />} />
-        <Route path="stats" element={<Stats/>}/>
-        <Route path="theme" element={<Theme/>}/>
       </Routes>
     </BrowserRouter>
   );

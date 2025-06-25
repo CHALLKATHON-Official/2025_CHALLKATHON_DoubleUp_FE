@@ -1,21 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuth } from "firebase/auth";
-import {
-  doc,
-  getDoc,
-  collection,
-  query,
-  where,
-  getDocs,
-  setDoc,
-  deleteDoc,
-  onSnapshot,
-} from "firebase/firestore";
+import { doc, getDoc, collection, query, where, getDocs, setDoc, deleteDoc, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import CopyID from "../components/CopyID";
 import Modal from "../components/Modal";
-//import BlueArrow from "../images/blueArrow.png";
 import defaultBunny from "../images/default-bunny.png";
 import FriendCard from "../components/FriendCard";
 

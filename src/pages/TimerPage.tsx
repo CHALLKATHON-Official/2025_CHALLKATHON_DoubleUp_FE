@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Timer from "../components/Timer";
 import rabbitImg from "../images/studyingRabbit.png";
-import BlueArrow from "../images/blueArrow.png";
 
 const TimerPage = () => {
   const [mode, setMode] = useState<"work" | "break">("work");
