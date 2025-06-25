@@ -5,16 +5,15 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import CalendarBox from "../components/CalendarBox";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
-//import BlueArrow from "../images/blueArrow.png";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+
+// KST 기준 날짜 키 생성 함수 추가
+const getKSTDateKey = (date: Date) => {
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
 
 const getWeekRange = (date: Date): Date[] => {
   const start = new Date(date);
@@ -56,7 +55,8 @@ const Stats = () => {
     const user = auth.currentUser;
     if (!user) return;
 
-    const key = date.toISOString().slice(0, 10);
+    // 수정: UTC 대신 로컬 기준 key 사용
+    const key = getKSTDateKey(date);
     const ref = doc(db, "user", user.uid, "focusRecords", key);
     const snap = await getDoc(ref);
     const data = snap.exists() ? snap.data() : {};
@@ -71,7 +71,8 @@ const Stats = () => {
 
     const result: any[] = await Promise.all(
       dates.map(async (date) => {
-        const key = date.toISOString().slice(0, 10);
+        // 수정: UTC 대신 로컬 기준 key 사용
+        const key = getKSTDateKey(date);
         const ref = doc(db, "user", user.uid, "focusRecords", key);
         const snap = await getDoc(ref);
         const count = snap.exists() ? snap.data().cycleCount || 0 : 0;
@@ -101,18 +102,15 @@ const Stats = () => {
         onClick={goBack}
         className="absolute top-4 left-4 flex items-center gap-1 text-sm hover:text-black"
       >
-        {/* <img src={BlueArrow} alt="goBack" className="w-8 h-8" /> */}
         ❮ 뒤로가기
       </button>
       <h1 className="text-3xl font-bold mb-8 mt-8 text-gray-800 font-['IBM_Plex_Sans_KR']">통계 보기</h1>
 
       <CalendarBox selectedDate={selectedDate} onDateSelect={setSelectedDate} />
       <div className="w-full max-w-[700px] bg-white border-gray-300 mt-8 border rounded-xl p-6">
-        {/* 오늘 집중 시간 텍스트 */}
         <div className="text-center mt-6 text-lg text-gray-700 font-['IBM_Plex_Sans_KR']">
-          오늘은 {hours}시간 {minutes}분 집중하셨어요. <br/> 🍅 총 {cycleCount}회 완료
+          오늘은 {hours}시간 {minutes}분 집중하셨어요. <br /> 🍅 총 {cycleCount}회 완료
         </div>
-        {/* 그래프 영역 */}
         <div className="w-full max-w-4xl mt-10">
           <h2 className="text-xl font-semibold text-[var(--color-week-graph)] mb-2 font-['IBM_Plex_Sans_KR']">주간 집중 통계</h2>
           <ResponsiveContainer width="100%" height={300}>
@@ -137,7 +135,6 @@ const Stats = () => {
           </ResponsiveContainer>
         </div>
       </div>
-      {/* 확인 버튼 */}
       <button
         onClick={() => navigate("/settings")}
         className="mt-10  bg-[var(--color-btn)]  hover:bg-[var(--color-btn-hover)]  text-white px-6 py-2 rounded-lg shadow font-['IBM_Plex_Sans_KR']"
