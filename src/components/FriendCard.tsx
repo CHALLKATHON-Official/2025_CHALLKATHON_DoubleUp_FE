@@ -15,7 +15,7 @@ const FriendCard = ({ nickname, status, onDelete }: FriendCardProps) => {
   const randomColor = pastelColors[Math.floor(Math.random() * pastelColors.length)];
 
   return (
-    <div className="flex items-center justify-between p-3 bg-white rounded-md shadow">
+    <div className="flex items-center justify-between p-3 bg-white rounded-md shadow min-w-[380px]">
       <div className="flex items-center gap-4">
         <div
           className="w-10 h-10 rounded-full flex items-center justify-center"

@@ -34,8 +34,8 @@
     --color-bg: #f0fdf4;
     --color-accent: #16a34a;
     --color-timer: #d4ffd0;
-    --color-btn: #a9eec2;
-    --color-btn-hover: #53e789;;
+    --color-btn:rgb(111, 212, 148);
+    --color-btn-hover:rgb(40, 199, 98);;
     --color-week-graph: rgb(117, 224, 156);;
     --color-month-graph:rgb(16, 192, 80);
   }
