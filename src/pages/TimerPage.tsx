@@ -14,17 +14,17 @@ const TimerPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-white relative">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-blue-50 relative">
       {/* 화면 왼쪽 상단 고정 뒤로가기 버튼 */}
       <button
         onClick={goBack}
-        className="absolute top-4 left-4 flex items-center gap-1 text-sm hover:text-black"
+        className="absolute top-4 left-4 flex items-center"
       >
         <img src={BlueArrow} alt="goBack" className="w-8 h-8" />
       </button>
 
       {/* 토끼 이미지 */}
-      <img src={rabbitImg} alt="studying" className="w-24 h-24 mb-6" />
+      <img src={rabbitImg} alt="studying" className="w-32 h-32 mb-8" />
 
       {/* 타이머 */}
       <Timer mode={mode} onRunningChange={setIsRunning} />

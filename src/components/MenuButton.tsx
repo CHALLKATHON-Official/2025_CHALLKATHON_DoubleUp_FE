@@ -32,7 +32,7 @@ const MenuButton = () => {
               onClick={() => handleNavigate("/settings")}
               className="block w-full px-4 py-2 text-left hover:bg-gray-100"
             >
-              설정
+              더보기
             </button>
             <button
               onClick={() => handleNavigate("/timer")}
