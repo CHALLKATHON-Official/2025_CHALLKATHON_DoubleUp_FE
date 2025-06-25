@@ -29,7 +29,6 @@ const LoginHome = () => {
             email: user.email,
             displayName: user.displayName || "",
             uniqueID: randomId,
-            photoURL: user.photoURL || "",
           });
 
           navigate("/welcome", {
@@ -41,7 +40,6 @@ const LoginHome = () => {
           // 기존 유저
           const userData = userSnap.data();
 
-          // 닉네임이 없는 경우 → 다시 Welcome 페이지로 이동시켜서 입력받기
           if (!userData.nickname) {
             navigate("/welcome", {
               state: {
@@ -49,11 +47,9 @@ const LoginHome = () => {
               },
             });
           } else {
-            // 닉네임이 있으면 바로 캘린더 페이지로 이동
             navigate("/calendar", {
               state: {
                 uniqueID: userData.uniqueID,
-                photoURL: userData.photoURL,
                 nickname: userData.nickname,
               },
             });
@@ -69,26 +65,23 @@ const LoginHome = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-blue-50">
-        {/* 제목과 소개 문장 영역 */}
-        <div className="mb-24 text-center">
-          <h1 className="text-6xl font-bold text-gray-800 mb-2 pt-20 pb-10 font-['IBM_Plex_Sans_KR']">25H</h1>
-          <p className="text-lg text-gray-600">25분 뽀모도로 집중하기✏</p>
-        </div>
+      {/* 제목과 소개 문장 영역 */}
+      <div className="mb-24 text-center">
+        <h1 className="text-6xl font-bold text-gray-800 mb-2 pt-20 pb-10">25H</h1>
+        <p className="text-lg text-gray-600">25분 뽀모도로 집중하기✏</p>
+      </div>
 
-        {/* 로그인 버튼 영역 */}
-        <div className="mt-20 flex items-center justify-center">
-          <button
+      {/* 로그인 버튼 영역 */}
+      <div className="mt-20 flex items-center justify-center">
+        <button
           onClick={handleGoogleLogin}
           className="flex items-center justify-center gap-3 px-6 py-3 min-w-[256px] rounded-lg border border-gray-300 bg-white text-gray-700 shadow hover:bg-gray-100 transition"
         >
           <FcGoogle size={20} />
           <span className="text-base text-gray-700 font-normal">구글 로그인</span>
         </button>
-        </div>
-
-    
       </div>
-      
+    </div>
   );
 };
 
