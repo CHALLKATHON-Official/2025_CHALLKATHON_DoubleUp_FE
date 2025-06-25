@@ -145,20 +145,43 @@ const CalendarPage = () => {
           {todos[formatDateKey(selectedDate)]?.length ? (
             todos[formatDateKey(selectedDate)].map((todo, index) => (
               <div key={index} className="mb-2 flex justify-between items-center ml-4 pt-2">
-                <p className={todo.checked ? "line-through text-gray-400" : ""}>
+                <p className={`flex-1 ${todo.checked ? "line-through text-gray-400" : ""}`}>
                   {todo.task}
                 </p>
+
                 <div className="flex items-center gap-2 mr-4">
-                  <input
-                    type="checkbox"
-                    checked={todo.checked}
-                    onChange={() => toggleTodoChecked(index)}
-                  />
+                  <button
+                    onClick={() => toggleTodoChecked(index)}
+                    className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors duration-200 ${
+                      todo.checked ? "bg-[var(--color-accent)] border-[var(--color-accent)]" : "border-gray-400"
+                    }`}
+                  >
+                    {todo.checked && (
+                      <svg
+                        className="w-4 h-4 text-white"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="3"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                    )}
+                  </button>
+
                   <button
                     onClick={() => deleteTodo(index)}
-                    className="text-xs font-bold"
+                    className="text-gray-300 hover:text-red-400 transition duration-150"
                   >
-                    X
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
                   </button>
                 </div>
               </div>
