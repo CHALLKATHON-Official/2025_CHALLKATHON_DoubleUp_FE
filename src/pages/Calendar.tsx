@@ -122,7 +122,7 @@ const CalendarPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--color-bg)] flex flex-col items-center justify-start py-10 px-4">
+    <div className="min-h-screen bg-[var(--color-bg)] flex flex-col items-center justify-start py-10 px-4 pt-20">
       <MenuButton />
 
       <CalendarBox
@@ -130,12 +130,12 @@ const CalendarPage = () => {
         onDateSelect={(date) => setSelectedDate(getStartOfDay(date))}
       />
 
-      <div className="bg-white rounded-xl border border-gray-300 p-6 mt-6 min-w-[700px] min-h-[300px] text-xl shadow-sm font-['IBM_Plex_Sans_KR']">
+      <div className="bg-white rounded-xl border border-gray-300 p-4 sm:p-6 mt-6 w-full max-w-3xl min-h-[300px] text-base sm:text-xl shadow-sm font-['IBM_Plex_Sans_KR']">
         <div className="flex justify-between items-center mb-3">
-          <h3 className="font-semibold ml-2 pt-1">할 일 목록</h3>
+          <h3 className="font-semibold ml-2 pt-1 text-lg sm:text-xl">할 일 목록</h3>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="text-2xl font-bold mr-4 "
+            className="text-xl sm:text-2xl font-bold mr-4"
           >
             +
           </button>
@@ -144,12 +144,12 @@ const CalendarPage = () => {
         <div>
           {todos[formatDateKey(selectedDate)]?.length ? (
             todos[formatDateKey(selectedDate)].map((todo, index) => (
-              <div key={index} className="mb-2 flex justify-between items-center ml-4 pt-2">
-                <p className={`flex-1 ${todo.checked ? "line-through text-gray-400" : ""}`}>
+              <div key={index} className="mb-2 flex justify-between items-center ml-2 sm:ml-4 pt-2">
+                <p className={`flex-1 text-sm sm:text-base ${todo.checked ? "line-through text-gray-400" : ""}`}>
                   {todo.task}
                 </p>
 
-                <div className="flex items-center gap-2 mr-4">
+                <div className="flex items-center gap-2 mr-2 sm:mr-4">
                   <button
                     onClick={() => toggleTodoChecked(index)}
                     className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors duration-200 ${
@@ -187,7 +187,7 @@ const CalendarPage = () => {
               </div>
             ))
           ) : (
-            <p className="text-gray-400">할 일이 없습니다.</p>
+            <p className="text-gray-400 text-sm sm:text-base">할 일이 없습니다.</p>
           )}
         </div>
       </div>

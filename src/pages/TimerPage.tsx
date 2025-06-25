@@ -23,7 +23,7 @@ const TimerPage = () => {
       </button>
 
       {/* 토끼 이미지 */}
-      <img src={rabbitImg} alt="studying" className="w-32 h-32 mb-8" />
+      <img src={rabbitImg} alt="studying" className="w-24 h-24 sm:w-32 sm:h-32 mb-6" />
 
       {/* 타이머 */}
       <Timer mode={mode} onRunningChange={setIsRunning} />
@@ -33,7 +33,7 @@ const TimerPage = () => {
         <button
           onClick={() => setMode("work")}
           disabled={isRunning}
-          className={`text-3xl px-4 py-2 rounded-lg shadow ${
+          className={`text-2xl px-3 py-2 rounded-lg shadow w-20 sm:w-24 ${
             mode === "work" ? "bg-[var(--color-btn-hover)]" : "bg-[var(--color-btn)]"
           } ${isRunning ? "opacity-50 cursor-not-allowed" : ""}`}
         >
@@ -42,7 +42,7 @@ const TimerPage = () => {
         <button
           onClick={() => setMode("break")}
           disabled={isRunning}
-          className={`text-3xl px-4 py-2 rounded-lg shadow ${
+          className={`text-2xl px-3 py-2 rounded-lg shadow w-20 sm:w-24 ${
             mode === "break" ? "bg-[var(--color-btn-hover)]" : "bg-[var(--color-btn)]"
           } ${isRunning ? "opacity-50 cursor-not-allowed" : ""}`}
         >

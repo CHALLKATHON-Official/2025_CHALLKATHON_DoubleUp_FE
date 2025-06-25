@@ -34,8 +34,7 @@ const getMonthRange = (date: Date): Date[] => {
 };
 
 const formatLabel = (date: Date) => {
-  const weekDay = date.toLocaleDateString("ko-KR", { weekday: "short" });
-  return `${weekDay} (${date.getMonth() + 1}/${date.getDate()})`;
+  return date.toLocaleDateString("ko-KR", { weekday: "short" });
 };
 
 const Stats = () => {
@@ -104,19 +103,19 @@ const Stats = () => {
       >
         ❮ 뒤로가기
       </button>
-      <h1 className="text-3xl font-bold mb-8 mt-8 text-gray-800 font-['IBM_Plex_Sans_KR']">통계 보기</h1>
+      <h1 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 mt-6 sm:mt-8 text-gray-800 font-['IBM_Plex_Sans_KR']">통계 보기</h1>
 
       <CalendarBox selectedDate={selectedDate} onDateSelect={setSelectedDate} />
-      <div className="w-full max-w-[700px] bg-white border-gray-300 mt-8 border rounded-xl p-6">
-        <div className="text-center mt-6 text-lg text-gray-700 font-['IBM_Plex_Sans_KR']">
+      <div className="w-full max-w-[760px] bg-white border-gray-300 mt-6 sm:mt-8 border rounded-xl px-4 py-5 sm:p-6">
+        <div className="text-center mt-6 text-base sm:text-lg text-gray-700 font-['IBM_Plex_Sans_KR']">
           {selectedDate.getMonth() + 1}월 {selectedDate.getDate()}일은 {hours}시간 {minutes}분 집중하셨어요. <br /> 🍅 총 {cycleCount}회 완료
         </div>
         <div className="w-full max-w-4xl mt-10">
-          <h2 className="text-xl font-semibold text-[var(--color-week-graph)] mb-2 font-['IBM_Plex_Sans_KR']">주간 집중 통계</h2>
+          <h2 className="text-lg sm:text-xl font-semibold text-[var(--color-week-graph)] mb-2 font-['IBM_Plex_Sans_KR']">주간 집중 통계</h2>
           <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={weeklyData} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
+            <BarChart data={weeklyData} margin={{ top: 5, right: 30, left: -30, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="label" />
+              1<XAxis dataKey="label" />
               <YAxis allowDecimals={false} />
               <Tooltip />
               <Bar dataKey="count" fill="var(--color-week-graph)" />
@@ -125,7 +124,7 @@ const Stats = () => {
 
           <h2 className="text-xl font-semibold text-[var(--color-month-graph)] mt-10 mb-2 font-['IBM_Plex_Sans_KR']">월간 집중 통계</h2>
           <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={monthlyData} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
+            <BarChart data={monthlyData} margin={{ top: 5, right: 30, left: -30, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="label" interval={4} />
               <YAxis allowDecimals={false} />
