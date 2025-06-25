@@ -16,12 +16,17 @@ interface Friend {
 }
 
 const pastelColors = [
-  "#F9C8D9", "#D1F9C8", "#C8E7F9", "#FFE7CC", "#E5D1F9", "#F9F1C8"
+  "#F9C8D9",
+  "#D1F9C8",
+  "#C8E7F9",
+  "#FFE7CC",
+  "#E5D1F9",
+  "#F9F1C8",
 ];
 
-
 const Friends = () => {
-  const randomColor = pastelColors[Math.floor(Math.random() * pastelColors.length)];
+  const randomColor =
+    pastelColors[Math.floor(Math.random() * pastelColors.length)];
   const [myUniqueID, setMyUniqueID] = useState("");
   const [inputID, setInputID] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
@@ -50,50 +55,49 @@ const Friends = () => {
     fetchMyID();
   }, []);
 
-// 친구 목록 + 상태 실시간 구독
-useEffect(() => {
-  const auth = getAuth();
-  const user = auth.currentUser;
-  if (!user) return;
+  // 친구 목록 + 상태 실시간 구독
+  useEffect(() => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    if (!user) return;
 
-  const friendsRef = collection(db, "user", user.uid, "friends");
+    const friendsRef = collection(db, "user", user.uid, "friends");
+    const unsubList: (() => void)[] = [];
 
-  // unsubscribe 함수 저장용
-  const unsubList: (() => void)[] = [];
+    const friendsUnsub = onSnapshot(friendsRef, (snapshot) => {
+      const currentUIDs: string[] = [];
 
-  // 친구 목록 구독
-  const friendsUnsub = onSnapshot(friendsRef, (snapshot) => {
-    const currentUIDs: string[] = [];
+      snapshot.forEach((docSnap) => {
+        const { uniqueID } = docSnap.data(); // nickname은 제외
+        const friendUID = docSnap.id;
+        currentUIDs.push(friendUID);
 
-    snapshot.forEach((docSnap) => {
-      const { nickname, uniqueID } = docSnap.data();
-      const friendUID = docSnap.id;
-      currentUIDs.push(friendUID);
+        const userUnsub = onSnapshot(doc(db, "user", friendUID), (userDoc) => {
+          if (!userDoc.exists()) return;
 
-      // 각 친구 상태 실시간 구독
-      const userUnsub = onSnapshot(doc(db, "user", friendUID), (userDoc) => {
-        const isFocusing = userDoc.exists() && userDoc.data().isFocusing === true;
+          const data = userDoc.data();
+          const nickname = data.nickname || "(알 수 없음)";
+          const isFocusing = data.isFocusing === true;
 
-        setFriends((prev) => {
-          const others = prev.filter((f) => f.uid !== friendUID);
-          return [...others, { nickname, uniqueID, uid: friendUID, isFocusing }];
+          setFriends((prev) => {
+            const others = prev.filter((f) => f.uid !== friendUID);
+            return [...others, { nickname, uniqueID, uid: friendUID, isFocusing }];
+          });
         });
+
+        unsubList.push(userUnsub);
       });
 
-      unsubList.push(userUnsub);
+      // 친구 목록에서 빠진 유저 제거
+      setFriends((prev) => prev.filter((f) => currentUIDs.includes(f.uid)));
     });
 
-    // 친구 목록에서 빠진 유저 제거
-    setFriends((prev) => prev.filter((f) => currentUIDs.includes(f.uid)));
-  });
+    unsubList.push(friendsUnsub);
 
-  unsubList.push(friendsUnsub);
-
-  // cleanup: 컴포넌트 unmount 시 모든 구독 해제
-  return () => {
-    unsubList.forEach((unsub) => unsub());
-  };
-}, []);
+    return () => {
+      unsubList.forEach((unsub) => unsub());
+    };
+  }, []);
 
   // ID 검색
   const searchID = async () => {
@@ -140,7 +144,7 @@ useEffect(() => {
     const friendUid = selectedUser.uid;
 
     await setDoc(doc(db, "user", myUid, "friends", friendUid), {
-      nickname: selectedUser.name,
+      nickname: selectedUser.name, // 그냥 저장은 함
       uniqueID: selectedUser.uniqueID,
     });
 
@@ -178,7 +182,7 @@ useEffect(() => {
             />
             <button
               onClick={searchID}
-              className="min-w-[90px] px-3 py-2 text-sm sm:text-base  bg-[var(--color-btn)]  rounded hover:bg-[var(--color-btn-hover)]"
+              className="min-w-[90px] px-3 py-2 text-sm sm:text-base bg-[var(--color-btn)] rounded hover:bg-[var(--color-btn-hover)]"
             >
               🔍 추가
             </button>
@@ -200,20 +204,22 @@ useEffect(() => {
 
         {modalOpen && selectedUser && (
           <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
-            <div className="flex flex-col items-center gap-4 p-6 w-[280px] text-center">
-              <img
-                src={defaultBunny}
-                alt="기본 프로필"
-                className="w-20 h-20 rounded-full object-cover"
-                style={{ backgroundColor: randomColor }}
-              />
-              <p className="text-xl font-semibold">{selectedUser.name}</p>
-              <button
-                onClick={addFriend}
-                className="px-4 py-2 bg-[var(--color-btn)] rounded hover:bg-[var(--color-btn-hover)]"
-              >
-                추가
-              </button>
+            <div className="flex justify-center">
+              <div className="flex flex-col items-center gap-4 p-6 w-[280px] sm:w-[300px] text-center">
+                <img
+                  src={defaultBunny}
+                  alt="기본 프로필"
+                  className="w-20 h-20 rounded-full object-cover"
+                  style={{ backgroundColor: randomColor }}
+                />
+                <p className="text-xl font-semibold">{selectedUser.name}</p>
+                <button
+                  onClick={addFriend}
+                  className="px-4 py-2 bg-[var(--color-btn)] rounded hover:bg-[var(--color-btn-hover)] text-white"
+                >
+                  추가
+                </button>
+              </div>
             </div>
           </Modal>
         )}
