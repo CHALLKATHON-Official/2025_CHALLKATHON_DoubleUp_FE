@@ -136,7 +136,7 @@ const Timer = ({ mode, onRunningChange }: TimerProps) => {
           </p>
           <button
             onClick={handleModalClose}
-            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md"
+            className="mt-4 px-4 py-2 bg-[var(--color-btn)] text-white rounded-md"
           >
             확인
           </button>
@@ -144,11 +144,11 @@ const Timer = ({ mode, onRunningChange }: TimerProps) => {
       </Modal>
 
       <div
-        className="relative grid place-items-center rounded-full border-4 border-blue-300"
+        className="relative grid place-items-center rounded-full border-4 border-[var(--color-btn)]"
         style={{
           width: "320px",
           height: "320px",
-          background: `conic-gradient(#bfdbfe ${progress}%, transparent 0)`,
+          background: `conic-gradient(var(--color-timer) ${progress}%, transparent 0)`,
         }}
       >
         <span className="text-3xl font-bold">{minuteTime}</span>
@@ -159,7 +159,7 @@ const Timer = ({ mode, onRunningChange }: TimerProps) => {
         className={`px-6 py-2 mt-8 rounded-md shadow ${
           isRunning
             ? "bg-red-400 hover:bg-red-500 text-white"
-            : "bg-blue-400 hover:bg-blue-500 text-white"
+            : "bg-[var(--color-btn)] hover:bg-[var(--color-btn-hover)] text-white"
         }`}
       >
         {isRunning ? "정지하기" : "시작하기"}

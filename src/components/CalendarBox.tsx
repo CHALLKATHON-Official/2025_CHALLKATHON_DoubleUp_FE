@@ -104,7 +104,7 @@ const CalendarBox: React.FC<CalendarBoxProps> = ({
                 key={idx}
                 onClick={() => thisDate && onDateSelect(thisDate)} // 날짜 클릭 시 날짜 전달
                 className={`w-12 h-12 flex items-center justify-center leading-none cursor-pointer text-lg transition ${
-                  isSelected ? "bg-red-400 text-white rounded-full" : ""
+                  isSelected ? "bg-[var(--color-accent)] text-white rounded-full" : ""
                 }`}
               >
                 {day ?? ""} {/* null이면 빈칸 */}

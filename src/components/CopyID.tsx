@@ -15,7 +15,6 @@ const CopyID = ({ uniqueID }: { uniqueID: string }) => {
 
   return (
     <div className="w-full">
-        {/* <p className="text-base text-gray-600 mb-1">내 아이디</p> */}
         <div className="flex gap-2">
             <input
             type="text"
@@ -25,7 +24,7 @@ const CopyID = ({ uniqueID }: { uniqueID: string }) => {
             />
             <button
             onClick={handleCopy}
-            className="min-w-[90px] px-3 py-1 bg-blue-100 rounded hover:bg-blue-200"
+            className="min-w-[90px] px-3 py-1  bg-[var(--color-btn)] rounded hover:bg-[var(--color-btn-hover)]"
             >
             📋 복사
             </button>

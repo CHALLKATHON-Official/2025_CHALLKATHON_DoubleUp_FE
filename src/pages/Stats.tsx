@@ -14,7 +14,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import BlueArrow from "../images/blueArrow.png";
+//import BlueArrow from "../images/blueArrow.png";
 
 const getWeekRange = (date: Date): Date[] => {
   const start = new Date(date);
@@ -48,7 +48,7 @@ const Stats = () => {
   const navigate = useNavigate();
 
   const goBack = () => {
-    navigate("/calendar");
+    navigate("/settings");
   };
 
   const fetchTodaySummary = async (date: Date) => {
@@ -96,12 +96,13 @@ const Stats = () => {
   const minutes = focusTime % 60;
 
   return (
-    <div className="min-h-screen px-4 py-6 flex flex-col items-center bg-blue-50">
+    <div className="min-h-screen px-4 py-6 flex flex-col items-center  bg-[var(--color-bg)] ">
       <button
         onClick={goBack}
         className="absolute top-4 left-4 flex items-center gap-1 text-sm hover:text-black"
       >
-        <img src={BlueArrow} alt="goBack" className="w-8 h-8" />
+        {/* <img src={BlueArrow} alt="goBack" className="w-8 h-8" /> */}
+        ❮ 뒤로가기
       </button>
       <h1 className="text-3xl font-bold mb-8 mt-8 text-gray-800 font-['IBM_Plex_Sans_KR']">통계 보기</h1>
 
@@ -113,25 +114,25 @@ const Stats = () => {
         </div>
         {/* 그래프 영역 */}
         <div className="w-full max-w-4xl mt-10">
-          <h2 className="text-xl font-semibold text-red-400 mb-2 font-['IBM_Plex_Sans_KR']">주간 집중 통계</h2>
+          <h2 className="text-xl font-semibold text-[var(--color-week-graph)] mb-2 font-['IBM_Plex_Sans_KR']">주간 집중 통계</h2>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={weeklyData} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="label" />
               <YAxis allowDecimals={false} />
               <Tooltip />
-              <Bar dataKey="count" fill="#f87171" />
+              <Bar dataKey="count" fill="var(--color-week-graph)" />
             </BarChart>
           </ResponsiveContainer>
 
-          <h2 className="text-xl font-semibold text-green-600 mt-10 mb-2 font-['IBM_Plex_Sans_KR']">월간 집중 통계</h2>
+          <h2 className="text-xl font-semibold text-[var(--color-month-graph)] mt-10 mb-2 font-['IBM_Plex_Sans_KR']">월간 집중 통계</h2>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={monthlyData} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="label" interval={4} />
               <YAxis allowDecimals={false} />
               <Tooltip />
-              <Bar dataKey="count" fill="#50C878" />
+              <Bar dataKey="count" fill="var(--color-month-graph)" />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -139,7 +140,7 @@ const Stats = () => {
       {/* 확인 버튼 */}
       <button
         onClick={() => navigate("/settings")}
-        className="mt-10 bg-blue-400 hover:bg-blue-500 text-white px-6 py-2 rounded-lg shadow font-['IBM_Plex_Sans_KR']"
+        className="mt-10  bg-[var(--color-btn)]  hover:bg-[var(--color-btn-hover)]  text-white px-6 py-2 rounded-lg shadow font-['IBM_Plex_Sans_KR']"
       >
         확인
       </button>
