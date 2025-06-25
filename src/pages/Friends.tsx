@@ -44,41 +44,50 @@ const Friends = () => {
     fetchMyID();
   }, []);
 
-  // 친구 실시간 상태 업데이트
-  useEffect(() => {
-    const auth = getAuth();
-    const user = auth.currentUser;
-    if (!user) return;
+// 친구 목록 + 상태 실시간 구독
+useEffect(() => {
+  const auth = getAuth();
+  const user = auth.currentUser;
+  if (!user) return;
 
-    const unsubscribeList: (() => void)[] = [];
+  const friendsRef = collection(db, "user", user.uid, "friends");
 
-    const fetchFriendsRealtime = async () => {
-      const friendsRef = collection(db, "user", user.uid, "friends");
-      const snapshot = await getDocs(friendsRef);
+  // unsubscribe 함수 저장용
+  const unsubList: (() => void)[] = [];
 
-      for (const docSnap of snapshot.docs) {
-        const { nickname, uniqueID } = docSnap.data();
-        const friendUID = docSnap.id;
+  // 친구 목록 구독
+  const friendsUnsub = onSnapshot(friendsRef, (snapshot) => {
+    const currentUIDs: string[] = [];
 
-        const unsub = onSnapshot(doc(db, "user", friendUID), (userDoc) => {
-          const isFocusing = userDoc.exists() && userDoc.data().isFocusing === true;
+    snapshot.forEach((docSnap) => {
+      const { nickname, uniqueID } = docSnap.data();
+      const friendUID = docSnap.id;
+      currentUIDs.push(friendUID);
 
-          setFriends((prev) => {
-            const others = prev.filter((f) => f.uid !== friendUID);
-            return [...others, { nickname, uniqueID, uid: friendUID, isFocusing }];
-          });
+      // 각 친구 상태 실시간 구독
+      const userUnsub = onSnapshot(doc(db, "user", friendUID), (userDoc) => {
+        const isFocusing = userDoc.exists() && userDoc.data().isFocusing === true;
+
+        setFriends((prev) => {
+          const others = prev.filter((f) => f.uid !== friendUID);
+          return [...others, { nickname, uniqueID, uid: friendUID, isFocusing }];
         });
+      });
 
-        unsubscribeList.push(unsub);
-      }
-    };
+      unsubList.push(userUnsub);
+    });
 
-    fetchFriendsRealtime();
+    // 친구 목록에서 빠진 유저 제거 (선택사항)
+    setFriends((prev) => prev.filter((f) => currentUIDs.includes(f.uid)));
+  });
 
-    return () => {
-      unsubscribeList.forEach((unsub) => unsub());
-    };
-  }, []);
+  unsubList.push(friendsUnsub);
+
+  // cleanup: 컴포넌트 unmount 시 모든 구독 해제
+  return () => {
+    unsubList.forEach((unsub) => unsub());
+  };
+}, []);
 
   // ID 검색
   const searchID = async () => {
@@ -146,7 +155,6 @@ const Friends = () => {
     <div className="min-h-screen min-w-screen bg-[var(--color-bg)] flex justify-center items-start py-10 font-['IBM_Plex_Sans_KR']">
       <div className="w-full max-w-md space-y-6 px-4">
         <button onClick={goBack} className="absolute top-4 left-4 flex items-center">
-          {/* <img src={BlueArrow} alt="goBack" className="w-8 h-8" /> */}
           ❮ 뒤로가기
         </button>
 
