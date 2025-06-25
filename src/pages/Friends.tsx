@@ -158,14 +158,14 @@ useEffect(() => {
   };
 
   return (
-    <div className="min-h-screen min-w-screen bg-[var(--color-bg)] flex justify-center items-start py-10 font-['IBM_Plex_Sans_KR']">
+    <div className="min-h-screen bg-[var(--color-bg)] flex flex-col items-center py-10 px-4 font-['IBM_Plex_Sans_KR']">
       <div className="w-full max-w-md px-4">
         <button onClick={goBack} className="absolute top-4 left-4 flex items-center text-base">
           ❮ 뒤로가기
         </button>
 
         <div>
-          <p className="mb-1 font-medium">내 아이디</p>
+          <p className="mb-1 font-medium pt-6">내 아이디</p>
           <CopyID uniqueID={myUniqueID} />
 
           <p className="mb-1 font-medium pt-5">친구 추가</p>
@@ -174,18 +174,18 @@ useEffect(() => {
               type="text"
               value={inputID}
               onChange={(e) => setInputID(e.target.value)}
-              className="w-full px-4 py-2 border rounded"
+              className="w-full px-3 py-2 border rounded"
             />
             <button
               onClick={searchID}
-              className="min-w-[90px] px-3 py-1  bg-[var(--color-btn)]  rounded hover:bg-[var(--color-btn-hover)]"
+              className="min-w-[90px] px-3 py-2 text-sm sm:text-base  bg-[var(--color-btn)]  rounded hover:bg-[var(--color-btn-hover)]"
             >
               🔍 추가
             </button>
           </div>
 
           <p className="mb-2 font-medium pt-10">친구 목록</p>
-          <div className="p-4 space-y-3 min-h-[400px] max-h-[400px] overflow-y-auto bg-white border rounded-lg">
+          <div className="p-4 space-y-3 h-[calc(100vh-450px)] overflow-y-auto bg-white border rounded-lg">
             {friends.map((friend) => (
               <div key={friend.uid} className="flex justify-between items-center">
                 <FriendCard

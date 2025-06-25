@@ -145,7 +145,7 @@ const Timer = ({ mode, onRunningChange }: TimerProps) => {
   const progress = (1 - secondsLeft / (mode === "work" ? WORK_SEC : BREAK_SEC)) * 100;
 
   return (
-    <div className="flex flex-col items-center gap-6 select-none p-6 font-['IBM_Plex_Sans_KR']">
+    <div className="flex flex-col items-center gap-6 px-4 py-8 sm:p-6 select-none font-['IBM_Plex_Sans_KR']">
       <Modal isOpen={showModal} onClose={handleModalClose}>
         <div className="text-center">
           <p className="text-lg font-semibold">
@@ -161,10 +161,8 @@ const Timer = ({ mode, onRunningChange }: TimerProps) => {
       </Modal>
 
       <div
-        className="relative grid place-items-center rounded-full border-4 border-[var(--color-btn)]"
+        className="relative grid place-items-center rounded-full border-4 border-[var(--color-btn)] w-60 h-60 sm:w-80 sm:h-80"
         style={{
-          width: "320px",
-          height: "320px",
           background: `conic-gradient(var(--color-timer) ${progress}%, transparent 0)`,
         }}
       >
@@ -173,7 +171,7 @@ const Timer = ({ mode, onRunningChange }: TimerProps) => {
 
       <button
         onClick={handleToggle}
-        className={`px-6 py-2 mt-8 rounded-md shadow ${
+        className={`px-4 py-2 mt-6 rounded-md shadow ${
           isRunning
             ? "bg-red-400 hover:bg-red-500 text-white"
             : "bg-[var(--color-btn)] hover:bg-[var(--color-btn-hover)] text-white"
@@ -183,7 +181,7 @@ const Timer = ({ mode, onRunningChange }: TimerProps) => {
       </button>
 
       {mode === "work" && (
-        <div className="text-gray-600 text-center">
+        <div className="text-gray-600 text-center text-sm sm:text-base mt-2">
           <p className="font-bold">{todayCycle}회</p>
           <p>
             오늘 {Math.floor((todayCycle * 25) / 60)}시간{" "}
