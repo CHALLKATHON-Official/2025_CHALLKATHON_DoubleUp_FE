@@ -64,7 +64,7 @@ const LoginHome = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-blue-50">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-white">
       {/* 제목과 소개 문장 영역 */}
       <div className="mb-24 text-center">
         <h1 className="text-6xl font-bold text-gray-800 mb-2 pt-20 pb-10">25H</h1>

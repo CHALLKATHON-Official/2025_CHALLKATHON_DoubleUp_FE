@@ -122,7 +122,7 @@ const CalendarPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-start py-10 px-4 space-y-6">
+    <div className="min-h-screen bg-[var(--color-bg)] flex flex-col items-center justify-start py-10 px-4 space-y-6">
       <MenuButton />
 
       <CalendarBox
@@ -171,7 +171,7 @@ const CalendarPage = () => {
 
                   <button
                     onClick={() => deleteTodo(index)}
-                    className="text-gray-300 hover:text-red-400 transition duration-150"
+                    className="text-[var(--color-btn)] hover:text-[var(--color-btn-hover)] transition duration-150"
                   >
                     <svg
                       className="w-5 h-5"

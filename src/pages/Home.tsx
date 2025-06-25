@@ -16,7 +16,7 @@ const Home = () => {
   return (
     <div>
       <div className="flex flex-col items-center justify-center bg-white pt-10">
-        <h1 className="text-3xl font-bold text-blue-500 font-['IBM_Plex_Sans_KR']">25H</h1>
+        <h1 className="text-3xl font-bold text-gret-700 font-['IBM_Plex_Sans_KR']">25H</h1>
       </div>
       <div className="min-h-[700px] flex flex-col items-center justify-center bg-white">      
         {/* 앱 아이콘 */}

@@ -5,21 +5,21 @@
 @layer base {
   :root {
     --color-bg: #fff;
-    --color-accent: #d3d3d3;
+    --color-accent:rgb(163, 163, 163);
     --color-timer: #e6e6e6;
     --color-btn: #b3b3b3;
     --color-btn-hover: #555555;
-    --color-week-graph: #3d3d3d;
+    --color-week-graph:rgb(134, 134, 134);
     --color-month-graph: #292929;
   }
   html[data-theme='blue'] {
     --color-bg: #e0f2fe;
-    --color-accent: #18b3fa;
-    --color-timer: #d0f0ff;
+    --color-accent:rgb(61, 189, 248);
+    --color-timer:rgb(156, 224, 255);
     --color-btn: #6fcdf8;
     --color-btn-hover: #36baf7;
-    --color-week-graph: #1fb2f7;
-    --color-month-graph: #08abf7;
+    --color-week-graph:rgb(121, 206, 245);
+    --color-month-graph:rgb(5, 150, 218);
   }
   html[data-theme='pink'] {
     --color-bg: #fff0f6;
@@ -36,6 +36,7 @@
     --color-timer: #d4ffd0;
     --color-btn: #a9eec2;
     --color-btn-hover: #53e789;;
-    --color-week-graph: #367ed1;
+    --color-week-graph: rgb(117, 224, 156);;
+    --color-month-graph:rgb(16, 192, 80);
   }
 }

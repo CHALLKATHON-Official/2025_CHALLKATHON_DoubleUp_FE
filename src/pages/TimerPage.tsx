@@ -13,7 +13,7 @@ const TimerPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-white relative">
+    <div className="min-h-screen bg-[var(--color-bg)] flex flex-col items-center justify-center relative">
       {/* 화면 왼쪽 상단 고정 뒤로가기 버튼 */}
       <button
         onClick={goBack}
