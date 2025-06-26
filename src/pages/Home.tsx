@@ -1,4 +1,4 @@
-// src/pages/Home.tsx
+//로딩 페이지
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import appicon from "../images/appicon.png";

@@ -1,9 +1,9 @@
-// WeeklyFocusChart.tsx
+//일주일 집중 시간 데이터
 import { useEffect, useState } from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../firebase/firebase"; // 경로는 환경에 맞게 조정
+import { db } from "../firebase/firebase";
 
 type FocusData = {
   date: string;    // 날짜
@@ -12,7 +12,7 @@ type FocusData = {
 
 const WeeklyFocusData = () => {
   const [data, setData] = useState<FocusData[]>([]);
-
+  //로그인 상태 확인
   useEffect(() => {
     const auth = getAuth();
       const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -21,15 +21,16 @@ const WeeklyFocusData = () => {
       const today = new Date();
       const dates: string[] = [];
       const docIds: string[] = [];
-
+      //일주일 계산
       for (let i = 6; i >= 0; i--) {
         const d = new Date(today);
         d.setDate(today.getDate() - i);
         const dateStr = d.toISOString().slice(0, 10); // yyyy-mm-dd
         dates.push(dateStr);
+        //uid와 연월일 데이터 저장
         docIds.push(`${user.uid}_${dateStr}`);
       }
-
+      //db에서 날짜별 집중시간 확인
       const results: FocusData[] = await Promise.all(
         docIds.map(async (id, idx) => {
           const snap = await getDoc(doc(db, "focusSessions", id));

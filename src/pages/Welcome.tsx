@@ -1,8 +1,10 @@
+//신규 가입자 환영 페이지(닉네임 설정)
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 
+//초기 진입시 랜덤 닉네임
 const generateRandomNickname = () => {
   const adjectives = ["행복한", "용감한", "신나는", "똑똑한"];
   const animals = ["토끼", "고양이", "사자", "너구리", "강아지", "돌고래"];
@@ -17,6 +19,7 @@ const Welcome = () => {
 
   const [nickname, setNickname] = useState("");
 
+  //개인 아이디 확인 안되면(가입시 부여) 오류 페이지로
   useEffect(() => {
     if (!uniqueID || !uid) {
       navigate("/NotFound");
@@ -26,6 +29,7 @@ const Welcome = () => {
     }
   }, [uniqueID, uid, navigate]);
 
+  //닉네임 설정
   const handleStart = async () => {
     if (!nickname.trim()) {
       alert("닉네임을 입력해주세요!");

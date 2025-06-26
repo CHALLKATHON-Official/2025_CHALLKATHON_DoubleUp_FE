@@ -1,3 +1,4 @@
+//타이머
 import { useEffect, useState, useRef } from "react";
 import { getAuth } from "firebase/auth";
 import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
@@ -8,10 +9,10 @@ interface TimerProps {
   mode: "work" | "break";
   onRunningChange?: (running: boolean) => void;
 }
-
+//집중 시간 25분, 휴식 시간 5분 설정
 const WORK_SEC = 25 * 60;
 const BREAK_SEC = 5 * 60;
-
+//한국 기준 날짜 키
 const getKSTDateKey = (date: Date) => {
   const year = date.getFullYear();
   const month = (date.getMonth() + 1).toString().padStart(2, "0");
@@ -28,18 +29,19 @@ const Timer = ({ mode, onRunningChange }: TimerProps) => {
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const todayKey = getKSTDateKey(new Date());
+  const todayKey = getKSTDateKey(new Date()); //날짜
   const auth = getAuth();
   const user = auth.currentUser;
   const uid = user?.uid ?? "unknown";
-  const userCycleKey = `todayCycle-${uid}-${todayKey}`;
+  const userCycleKey = `todayCycle-${uid}-${todayKey}`; //날짜 별 25분 사이클 횟수
 
+  //모드 전환 시 타이머 리셋(타이머 동작 x)
   useEffect(() => {
     if (!isRunning) {
       setSecondsLeft(mode === "work" ? WORK_SEC : BREAK_SEC);
     }
   }, [mode]);
-
+  //타이머 동작 여부
   useEffect(() => {
     onRunningChange?.(isRunning);
   }, [isRunning]);
@@ -51,7 +53,7 @@ const Timer = ({ mode, onRunningChange }: TimerProps) => {
     }
   };
 }, [isRunning, uid]);
-
+  //사이클 수 가져오기
   useEffect(() => {
     const fetchCycleCount = async () => {
       if (mode !== "work" || !user) return;
@@ -72,7 +74,7 @@ const Timer = ({ mode, onRunningChange }: TimerProps) => {
 
     fetchCycleCount();
   }, [mode, user, todayKey]);
-
+  //타이머 실행
   useEffect(() => {
     if (!isRunning) return;
 
@@ -92,7 +94,7 @@ const Timer = ({ mode, onRunningChange }: TimerProps) => {
           setCycleCount(nextCycle);
           setTodayCycle(nextCycle);
           localStorage.setItem(userCycleKey, String(nextCycle));
-          saveFocusToFirestore();
+          saveFocusToFirestore(); //기록 저장
         }
 
         return 0;
@@ -101,7 +103,7 @@ const Timer = ({ mode, onRunningChange }: TimerProps) => {
 
     return () => clearInterval(intervalRef.current!);
   }, [isRunning, mode, cycleCount, userCycleKey]);
-
+//DB에 기록 저장
   const saveFocusToFirestore = async () => {
     if (!user) return;
 
@@ -123,7 +125,7 @@ const Timer = ({ mode, onRunningChange }: TimerProps) => {
       });
     }
   };
-
+//시작 정지 핸들러
   const handleToggle = async () => {
     if (isRunning) {
       clearInterval(intervalRef.current!);
@@ -146,6 +148,7 @@ const Timer = ({ mode, onRunningChange }: TimerProps) => {
 
   return (
     <div className="flex flex-col items-center gap-6 px-4 py-8 sm:p-6 select-none font-['IBM_Plex_Sans_KR']">
+      {/* 타이머 종료시 보이는 모달 */}
       <Modal isOpen={showModal} onClose={handleModalClose}>
         <div className="text-center">
           <p className="text-lg font-semibold">
@@ -159,7 +162,7 @@ const Timer = ({ mode, onRunningChange }: TimerProps) => {
           </button>
         </div>
       </Modal>
-
+      {/* 남은 시간, 진행도 표시 */}
       <div
         className="relative grid place-items-center rounded-full border-4 border-[var(--color-btn)] w-60 h-60 sm:w-80 sm:h-80"
         style={{
@@ -168,7 +171,7 @@ const Timer = ({ mode, onRunningChange }: TimerProps) => {
       >
         <span className="text-3xl font-bold">{minuteTime}</span>
       </div>
-
+      {/* 시작 정지 버튼 */}
       <button
         onClick={handleToggle}
         className={`px-4 py-2 mt-6 rounded-md shadow ${
@@ -179,7 +182,7 @@ const Timer = ({ mode, onRunningChange }: TimerProps) => {
       >
         {isRunning ? "정지하기" : "시작하기"}
       </button>
-
+      {/* 집중 시간 텍스트 */}
       {mode === "work" && (
         <div className="text-gray-600 text-center text-sm sm:text-base mt-2">
           <p className="font-bold">{todayCycle}회</p>

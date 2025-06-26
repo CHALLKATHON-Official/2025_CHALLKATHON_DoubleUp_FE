@@ -7,10 +7,11 @@ interface FriendCardProps {
   onDelete?: () => void;
 }
 
+//기본 프로필 배경 색
 const pastelColors = [
   "#F9C8D9", "#D1F9C8", "#C8E7F9", "#FFE7CC", "#E5D1F9", "#F9F1C8"
 ];
-
+//배경 색 랜덤 지정
 const FriendCard = ({ nickname, status, onDelete }: FriendCardProps) => {
   const randomColor = pastelColors[Math.floor(Math.random() * pastelColors.length)];
 

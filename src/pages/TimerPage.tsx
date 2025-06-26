@@ -1,3 +1,4 @@
+//타이머 페이지
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Timer from "../components/Timer";
@@ -14,7 +15,6 @@ const TimerPage = () => {
 
   return (
     <div className="min-h-screen font-['IBM_Plex_Sans_KR'] bg-[var(--color-bg)] flex flex-col items-center justify-center relative">
-      {/* 화면 왼쪽 상단 고정 뒤로가기 버튼 */}
       <button
         onClick={goBack}
         className="absolute top-4 left-4 flex items-center text-base"

@@ -1,4 +1,4 @@
-// src/components/ProtectedRoute.tsx
+//로그인한 사용자만 접근하도록 하는 컴포넌트
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -12,20 +12,22 @@ const ProtectedRoute = ({ children }: Props) => {
   const [user, setUser] = useState<any>(undefined);
   const [loading, setLoading] = useState(true);
 
+  //firebase auth 확인
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(getAuth(), (firebaseUser) => {
-        setTimeout(() => {
+      setTimeout(() => {
       setUser(firebaseUser);
-      setLoading(false);
-      if (!firebaseUser) {
-        navigate("/loginhome");
-      }
-    }, 1000);
+        setLoading(false);
+        //로그인 안한경우 로그인 화면으로 이동
+        if (!firebaseUser) {
+          navigate("/loginhome");
+        }
+      }, 1000);
     });
 
     return () => unsubscribe();
   }, [navigate]);
-
+  //인증 확인 중 로딩 스피너
   if (loading) {
     return (
         <div className="flex justify-center items-center h-screen">

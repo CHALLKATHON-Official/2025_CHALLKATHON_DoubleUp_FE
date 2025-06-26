@@ -1,4 +1,4 @@
-// pages/Stats.tsx
+//통계 페이지
 import { useEffect, useState } from "react";
 import { getAuth } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
@@ -14,7 +14,7 @@ const getKSTDateKey = (date: Date) => {
   const day = date.getDate().toString().padStart(2, "0");
   return `${year}-${month}-${day}`;
 };
-
+//주간 날짜 데이터
 const getWeekRange = (date: Date): Date[] => {
   const start = new Date(date);
   const day = start.getDay();
@@ -25,17 +25,24 @@ const getWeekRange = (date: Date): Date[] => {
     return d;
   });
 };
-
+//월간 날짜 데이터
 const getMonthRange = (date: Date): Date[] => {
   const year = date.getFullYear();
   const month = date.getMonth();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   return Array.from({ length: daysInMonth }, (_, i) => new Date(year, month, i + 1));
 };
-
+//주간 그래프용 날짜 표시(요일만)
 const formatLabel = (date: Date) => {
   return date.toLocaleDateString("ko-KR", { weekday: "short" });
 };
+//월간 그래프용 날짜 표시
+const formatMonthLabel = (date: Date) => {
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate();
+  return `${day}일`;
+};
+
 
 const Stats = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -62,8 +69,8 @@ const Stats = () => {
     setCycleCount(data.cycleCount || 0);
     setFocusTime(data.focusTime || 0);
   };
-
-  const fetchFocusData = async (dates: Date[], setter: (data: any[]) => void) => {
+  //사용자 별 집중(사이클)데이터 불러오기
+  const fetchFocusData = async (dates: Date[], setter: (data: any[]) => void, labelFormatter: (date: Date)=>string)  => {
     const auth = getAuth();
     const user = auth.currentUser;
     if (!user) return;
@@ -77,7 +84,7 @@ const Stats = () => {
         const count = snap.exists() ? snap.data().cycleCount || 0 : 0;
         return {
           date,
-          label: formatLabel(date),
+          label: labelFormatter(date),
           count,
         };
       })
@@ -85,11 +92,11 @@ const Stats = () => {
 
     setter(result);
   };
-
+  //선택한 날짜에 맞게 적용
   useEffect(() => {
     fetchTodaySummary(selectedDate);
-    fetchFocusData(getWeekRange(selectedDate), setWeeklyData);
-    fetchFocusData(getMonthRange(selectedDate), setMonthlyData);
+    fetchFocusData(getWeekRange(selectedDate), setWeeklyData, formatLabel);
+    fetchFocusData(getMonthRange(selectedDate), setMonthlyData, formatMonthLabel);
   }, [selectedDate]);
 
   const hours = Math.floor(focusTime / 60);
@@ -104,8 +111,9 @@ const Stats = () => {
         ❮ 뒤로가기
       </button>
       <h1 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 mt-6 sm:mt-8 text-gray-800 font-['IBM_Plex_Sans_KR']">통계 보기</h1>
-
+      {/* 캘린더 영역 */}
       <CalendarBox selectedDate={selectedDate} onDateSelect={setSelectedDate} />
+      {/* 통계 그래프 영역 */}
       <div className="w-full max-w-[760px] bg-white border-gray-300 mt-6 sm:mt-8 border rounded-xl px-4 py-5 sm:p-6">
         <div className="text-center mt-6 text-base sm:text-lg text-gray-700 font-['IBM_Plex_Sans_KR']">
           {selectedDate.getMonth() + 1}월 {selectedDate.getDate()}일은 {hours}시간 {minutes}분 집중하셨어요. <br /> 🍅 총 {cycleCount}회 완료

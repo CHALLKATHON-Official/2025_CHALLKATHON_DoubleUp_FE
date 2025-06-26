@@ -19,7 +19,7 @@ const LoginHome = () => {
         const userSnap = await getDoc(userRef);
 
         if (!userSnap.exists()) {
-          // 신규 유저
+          // 신규 유저, 랜덤 아이디 생성
           const randomId = Math.random().toString(36).substring(2, 10);
 
           localStorage.setItem("uid", user.uid);
@@ -39,7 +39,7 @@ const LoginHome = () => {
         } else {
           // 기존 유저
           const userData = userSnap.data();
-
+          //닉네임 없으면 닉네임 설정 환영 페이지로
           if (!userData.nickname) {
             navigate("/welcome", {
               state: {
