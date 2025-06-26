@@ -1,7 +1,7 @@
+//테마 설정 페이지
 import { useNavigate } from "react-router-dom";
-//import BlueArrow from "../images/blueArrow.png";
 
-
+//테마 설정(로컬 저장)
 function setTheme(theme: "default" | "blue" | "pink" | "green") {
   if (theme === "default") {
     document.documentElement.removeAttribute("data-theme");

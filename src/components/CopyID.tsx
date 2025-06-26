@@ -1,3 +1,4 @@
+//아이디 텍스트(읽기 전용), 버튼
 import { useState } from "react";
 
 const CopyID = ({ uniqueID }: { uniqueID: string }) => {
@@ -5,6 +6,7 @@ const CopyID = ({ uniqueID }: { uniqueID: string }) => {
 
   const handleCopy = async () => {
     try {
+      //아이디(uniqueID) 복사
       await navigator.clipboard.writeText(uniqueID);
       setCopied(true);
       setTimeout(() => setCopied(false), 1500); // 복사 완료 메시지 1.5초 후 사라짐
@@ -16,6 +18,7 @@ const CopyID = ({ uniqueID }: { uniqueID: string }) => {
   return (
     <div className="w-full">
         <div className="flex gap-2">
+          {/* 아이디 영역 */}
             <input
             type="text"
             value={uniqueID}

@@ -1,3 +1,4 @@
+//친구 목록 페이지
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuth } from "firebase/auth";
@@ -167,7 +168,7 @@ const Friends = () => {
         <button onClick={goBack} className="absolute top-4 left-4 flex items-center text-base">
           ❮ 뒤로가기
         </button>
-
+        
         <div>
           <p className="mb-1 font-medium pt-6">내 아이디</p>
           <CopyID uniqueID={myUniqueID} />
@@ -192,6 +193,7 @@ const Friends = () => {
           <div className="p-4 space-y-3 h-[calc(100vh-450px)] overflow-y-auto bg-white border rounded-lg">
             {friends.map((friend) => (
               <div key={friend.uid} className="flex justify-between items-center">
+                {/* 친구 목록, 상태 확인 */}
                 <FriendCard
                   nickname={friend.nickname}
                   status={friend.isFocusing ? "타이머 사용 중..." : ""}
@@ -202,6 +204,7 @@ const Friends = () => {
           </div>
         </div>
 
+        {/* ID검색 시 나오는 모달 */}
         {modalOpen && selectedUser && (
           <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
             <div className="flex justify-center">

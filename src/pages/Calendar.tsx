@@ -1,4 +1,4 @@
-// pages/Calendar.tsx
+//캘린더 페이지
 import { useState, useEffect } from "react";
 import CalendarBox from "../components/CalendarBox";
 import AddTodoModal from "../components/AddTodoModal";
@@ -41,7 +41,7 @@ const CalendarPage = () => {
     });
     return () => unsubscribe();
   }, []);
-
+  //Todo 추가
   const handleAddTodo = async (task: string) => {
     if (!selectedDate || !uid) return;
 
@@ -61,7 +61,7 @@ const CalendarPage = () => {
 
     setIsModalOpen(false);
   };
-
+  //선택한 날짜에 Todo 저장
   const fetchTodos = async (date: Date) => {
     if (!uid) {
       console.warn("UID 없음으로 fetchTodos 중단됨");
@@ -80,13 +80,13 @@ const CalendarPage = () => {
       [dateKey]: tasks,
     }));
   };
-
+  //사용자 계정, 선택한 날짜에 맞게 Todo적용
   useEffect(() => {
     if (uid && selectedDate) {
       fetchTodos(selectedDate);
     }
   }, [uid, selectedDate]);
-
+  //Todo 완료/삭제 토글
   const toggleTodoChecked = async (index: number) => {
     if (!selectedDate || !uid) return;
 
@@ -103,7 +103,7 @@ const CalendarPage = () => {
 
     await setDoc(todoDocRef, { tasks: updated });
   };
-
+  //Todo 삭제
   const deleteTodo = async (index: number) => {
     if (!selectedDate || !uid) return;
 
@@ -124,12 +124,12 @@ const CalendarPage = () => {
   return (
     <div className="min-h-screen bg-[var(--color-bg)] flex flex-col items-center justify-start py-10 px-4 pt-20">
       <MenuButton />
-
+      {/* 캘린더 영역 */}
       <CalendarBox
         selectedDate={selectedDate}
         onDateSelect={(date) => setSelectedDate(getStartOfDay(date))}
       />
-
+      {/* Todo 영역 */}
       <div className="bg-white rounded-xl border border-gray-300 p-4 sm:p-6 mt-6 w-full max-w-3xl min-h-[300px] text-base sm:text-xl shadow-sm font-['IBM_Plex_Sans_KR']">
         <div className="flex justify-between items-center mb-3">
           <h3 className="font-semibold ml-2 pt-1 text-lg sm:text-xl">할 일 목록</h3>
@@ -148,7 +148,7 @@ const CalendarPage = () => {
                 <p className={`flex-1 text-sm sm:text-base ${todo.checked ? "line-through text-gray-400" : ""}`}>
                   {todo.task}
                 </p>
-
+                {/* Todo 체크 토글 */}
                 <div className="flex items-center gap-2 mr-2 sm:mr-4">
                   <button
                     onClick={() => toggleTodoChecked(index)}
@@ -168,7 +168,7 @@ const CalendarPage = () => {
                       </svg>
                     )}
                   </button>
-
+                  {/* Todo 삭제 */}
                   <button
                     onClick={() => deleteTodo(index)}
                     className="text-[var(--color-btn)] hover:text-[var(--color-btn-hover)] transition duration-150"

@@ -1,3 +1,4 @@
+//설정 페이지
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getAuth } from "firebase/auth";
@@ -43,7 +44,6 @@ const Settings = () => {
 
   return (
     <div className="min-h-screen flex justify-center items-start pt-10 relative font-['IBM_Plex_Sans_KR'] bg-[var(--color-bg)]">
-      {/* 왼쪽 상단 고정 뒤로가기 버튼 */}
       <button
         onClick={goBack}
         className="absolute top-4 left-4 flex items-center gap-1 text-base hover:text-black"
