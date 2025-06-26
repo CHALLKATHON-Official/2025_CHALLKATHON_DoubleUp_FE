@@ -38,7 +38,6 @@ const formatLabel = (date: Date) => {
 };
 //월간 그래프용 날짜 표시
 const formatMonthLabel = (date: Date) => {
-  const month = (date.getMonth() + 1).toString().padStart(2, "0");
   const day = date.getDate();
   return `${day}일`;
 };
