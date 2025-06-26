@@ -32,10 +32,17 @@ const getMonthRange = (date: Date): Date[] => {
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   return Array.from({ length: daysInMonth }, (_, i) => new Date(year, month, i + 1));
 };
-//표시는 요일만 하도록
+//주간 그래프용 날짜 표시(요일만)
 const formatLabel = (date: Date) => {
   return date.toLocaleDateString("ko-KR", { weekday: "short" });
 };
+//월간 그래프용 날짜 표시
+const formatMonthLabel = (date: Date) => {
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate();
+  return `${day}일`;
+};
+
 
 const Stats = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -63,7 +70,7 @@ const Stats = () => {
     setFocusTime(data.focusTime || 0);
   };
   //사용자 별 집중(사이클)데이터 불러오기
-  const fetchFocusData = async (dates: Date[], setter: (data: any[]) => void) => {
+  const fetchFocusData = async (dates: Date[], setter: (data: any[]) => void, labelFormatter: (date: Date)=>string)  => {
     const auth = getAuth();
     const user = auth.currentUser;
     if (!user) return;
@@ -77,7 +84,7 @@ const Stats = () => {
         const count = snap.exists() ? snap.data().cycleCount || 0 : 0;
         return {
           date,
-          label: formatLabel(date),
+          label: labelFormatter(date),
           count,
         };
       })
@@ -88,8 +95,8 @@ const Stats = () => {
   //선택한 날짜에 맞게 적용
   useEffect(() => {
     fetchTodaySummary(selectedDate);
-    fetchFocusData(getWeekRange(selectedDate), setWeeklyData);
-    fetchFocusData(getMonthRange(selectedDate), setMonthlyData);
+    fetchFocusData(getWeekRange(selectedDate), setWeeklyData, formatLabel);
+    fetchFocusData(getMonthRange(selectedDate), setMonthlyData, formatMonthLabel);
   }, [selectedDate]);
 
   const hours = Math.floor(focusTime / 60);

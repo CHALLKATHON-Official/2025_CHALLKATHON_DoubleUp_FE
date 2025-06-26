@@ -1,3 +1,4 @@
+//신규 가입자 환영 페이지(닉네임 설정)
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { doc, updateDoc } from "firebase/firestore";

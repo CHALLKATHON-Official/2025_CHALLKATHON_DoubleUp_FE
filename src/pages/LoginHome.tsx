@@ -39,7 +39,7 @@ const LoginHome = () => {
         } else {
           // 기존 유저
           const userData = userSnap.data();
-
+          //닉네임 없으면 닉네임 설정 환영 페이지로
           if (!userData.nickname) {
             navigate("/welcome", {
               state: {
