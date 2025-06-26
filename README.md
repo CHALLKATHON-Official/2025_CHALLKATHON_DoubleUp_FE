@@ -37,6 +37,7 @@
 
 ---
 ## 파일 구조
+```
 src
  ┣ assets
  ┃ ┗ react.svg
@@ -74,6 +75,7 @@ src
  ┣ index.css
  ┣ main.tsx
  ┗ vite-env.d.ts
+```
  ---
 
 ## 👥 팀 정보
