@@ -36,11 +36,50 @@
 | **Firebase Hosting** | 정적 웹사이트 배포 |
 
 ---
+## 파일 구조
+src
+ ┣ assets
+ ┃ ┗ react.svg
+ ┣ components
+ ┃ ┣ AddTodoModal.tsx
+ ┃ ┣ CalendarBox.tsx
+ ┃ ┣ CopyID.tsx
+ ┃ ┣ FriendCard.tsx
+ ┃ ┣ MenuButton.tsx
+ ┃ ┣ Modal.tsx
+ ┃ ┣ ProtectedRoute.tsx
+ ┃ ┣ Timer.tsx
+ ┃ ┗ WeeklyFocusData.tsx
+ ┣ firebase
+ ┃ ┗ firebase.ts
+ ┣ images
+ ┃ ┣ appicon-grey.png
+ ┃ ┣ appicon-pink.png
+ ┃ ┣ appicon.png
+ ┃ ┣ default-bunny.png
+ ┃ ┗ studyingRabbit.png
+ ┣ pages
+ ┃ ┣ Calendar.tsx
+ ┃ ┣ Friends.tsx
+ ┃ ┣ Home.tsx
+ ┃ ┣ LoginHome.tsx
+ ┃ ┣ NotFound.tsx
+ ┃ ┣ Settings.tsx
+ ┃ ┣ Stats.tsx
+ ┃ ┣ Theme.tsx
+ ┃ ┣ TimerPage.tsx
+ ┃ ┗ Welcome.tsx
+ ┣ App.css
+ ┣ App.tsx
+ ┣ index.css
+ ┣ main.tsx
+ ┗ vite-env.d.ts
+ ---
 
 ## 👥 팀 정보
 
-- 202202191 유윤지 [통번역대학 TESOL영어학전공]
-- 202102439 이서연 [통번역대학 중국어통번역학과]
+- 202202191 유윤지 [통번역대학 TESOL영어학전공]: 프론트엔드/서버
+- 202102439 이서연 [통번역대학 중국어통번역학과]: 프론트엔드/디자인
 
 ---
 
