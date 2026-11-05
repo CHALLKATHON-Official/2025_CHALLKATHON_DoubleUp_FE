@@ -7,7 +7,7 @@
 
 ## 🔗 배포 주소
 
-👉 [https://hrs-884dd.web.app](https://hrs-884dd.web.app)
+👉 (배포 중지)
 
 ---
 
